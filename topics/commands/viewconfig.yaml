@@ -1,0 +1,12 @@
+title: How do I view my server configuration?
+content: |
+  To view the server configuration, use the `=viewconfig` command. This will show you the current:
+  - Prefix
+  - Category
+  - Access Roles
+  - Ping Roles
+  - Logging Channel
+  - Status of `loggingplus`
+  - Status of `anonymous`
+  - Greeting Message
+  - Closing Message

@@ -1,0 +1,8 @@
+title: How do I use X command
+subtitle: Examples on how to use each of the configuration commands
+position: 3
+content: |
+  Select a option below to find out how to use a command.
+links:
+  - name: ModMail commands
+    url: https://modmail.xyz/commands

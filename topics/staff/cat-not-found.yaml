@@ -1,0 +1,5 @@
+title: The bot says that a category is not found, what should I do?
+content: |
+   If you are a server admin; this is telling you that the bot is not set up properly. If you have previously used `=setup`, you might have deleted the category. Either use `=category [name]` to create the category or `=setup` to set up everything again.
+  
+  If you a server member; This is telling you that the bot is not set up properly on the server you are trying to contact. Reach out to that servers staff team some alternative way and explain why you were unable to contact ModMail.

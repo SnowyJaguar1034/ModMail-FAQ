@@ -1,0 +1,6 @@
+title: How do I view/change the prefix for my server.
+subtitle: Change the prefix or view the current prefix.
+content: |
+  To change the prefix for your server use the `=prefix <new prefix>` command. This will change the prefix for your server e.g. `=prefix !`.
+  To view the current prefix for your server use the `=prefix` command without any arguments.
+  If the bot is not responding to `=` you can mention the bot to use commands e.g. `@ModMail prefix`.

@@ -1,0 +1,7 @@
+title: Why isn't the bot responding to my commands?
+content: |
+  Please check the following before asking for help:
+  • The bot has Read Messages, Send Messages, and Embed Links permissions.
+  • You are using the correct prefix. Use @ModMail prefix to check the prefix.
+  • The command you are using is valid. Check using =help <command>.
+  • The bot is online. Discord might be having issues, or the bot might be restarting.

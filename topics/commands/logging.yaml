@@ -1,0 +1,4 @@
+title: How do I manage my logging channel?
+subtitle: How to toggle the logging channel on and off and move it to a different channel
+content: |
+  To change the logging channel you need to have the `=logging [optional logging channel]` command. You can set the logging channel with the `=loggingchannel <channel mention|channel id>` command.

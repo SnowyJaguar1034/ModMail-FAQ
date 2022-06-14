@@ -1,0 +1,3 @@
+title: Why is the custom emote I sent not working?
+content: |
+    Due to Discord requirements; the bot needs to be in the server where the emote is from in order to use it. Otherwise, the emote will show up as `:emote_name:` instead of the actual emote.

@@ -1,12 +1,16 @@
-title: What are the perks of Xenon Premium?
+title: What are the perks of Modmail Premium?
 content: |
-  In addition to backing up roles, channels and server settings using Xenon, premium allows you to **save messages, bans, role assignments and nicknames**. Each tier can save a different count of messages per channel. 
+  Depending on the tier of premium purchased users will get access to premium features on 1 server (<@&576756461267451934>), 3 servers (<@&576754574346551306>) and 5 servers (<@&576754671620980740>).
+  Users can manage their premium with the following commands:
+  - `=premiumassign <server ID>`
+  - `=premiumremove <server ID>`
+  - `=premiumslist`
+  
+  Users will also get access to the ticket snippet functionality. This allows staff to easily and quickly reply to users with a pre-defined response. The commands to manage snippets are:
+  - `=viewsnippet [optional snippet name]`
+  - `=snippetadd <snippet name> <snippet content>`
+  - `=snippetremove <snippet name>`
 
-  Xenon Premium also allows you to have **more backups and keep more automatic backups** per server. In addition to these you can also use premium to **synchronize messages** between multiple channels or **synchronize bans and role assignments** between multiple servers.
-
-  You can find a detailed list of perks for each tier on our [Website](<https://xenon.bot/premium>).
-links:
-  - name: Website
-    url: https://xenon.bot/premium
-  - name: Buy Premium
-    url: https://www.patreon.com/join/merlinfuchs
+  To use a snippet in a ticket staff can use the following commands:
+  - `=snippet <snippet name>` / `=a <snippet name>`
+  - `=asnippet <snippet name>` / `=as <snippet name>`

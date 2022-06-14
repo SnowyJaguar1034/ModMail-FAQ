@@ -1,0 +1,3 @@
+title: Why is the ModMail log not working?
+content: |
+    This is most likely due to a lack of permission. If it still does not work with full permissions, you can try deleting the channel and run `=logging` to enable it again.

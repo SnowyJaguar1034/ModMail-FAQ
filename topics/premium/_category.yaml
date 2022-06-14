@@ -1,12 +1,5 @@
-title: Xenon Premium
-subtitle: Topics related to xenon premium
+title: ModMail Premium
+subtitle: Topics related to Modmail premium
 position: 2
 content: |
-  Xenon is the base version of the bot and is free for everyone. It has the most essential features to back up your server and server templates. If you want to save messages or sync information between multiple servers and channels, take a look at Xenon Premium.
-
-  Xenon and Xenon Premium share the same database. That means backups from Xenon can be used with Xenon Premium and vice versa. Xenon Premium extends the features of Xenon and adds some cool new additions. There is no need to keep Xenon on the server when using Xenon Premium.
-links:
-  - name: Wiki
-    url: https://wiki.xenon.bot/premium
-  - name: Website
-    url: https://xenon.bot/premium
+  Modmail premium is a service that allows users to purchase premium features on Modmail.

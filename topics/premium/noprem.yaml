@@ -1,0 +1,13 @@
+title: Issues with premium
+content: |
+  Any user who bought premium will have one of the following roles depending on the tier purchased: <@&576756461267451934>, <@&576754574346551306> and <@&576754671620980740>.
+  This enables them to use the premium management commands to assign/remove premium from servers as well as check which servers they have premium on.
+  These commands are found on page 7 of the `=help` command, the second to last page
+
+  **Users must have joined this server before purchasing otherwise they will not have received the patron role and will not be able to use the premium management commands**
+
+  *Note: We can manually assign patron roles to those who do not join before purchase however the user will need to provide proof of payment via a ModMail ticket and the process could take a few hours while we wait for an administrator to be available.*
+image: https://media.discordapp.net/attachments/576765224460353589/929004300951253012/unknown.png
+links:
+  - name: Premium
+    url: https://modmail.xyz/premium

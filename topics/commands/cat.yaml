@@ -1,0 +1,3 @@
+title: How do I re-create my ModMail category?
+content: |
+ To re-create your ModMail category, you can use the `=category [optional name of category]` command. This will delete your current ModMail category and create a new one.

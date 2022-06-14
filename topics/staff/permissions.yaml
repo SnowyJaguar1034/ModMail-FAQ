@@ -1,0 +1,14 @@
+title: What permissions does ModMail need?
+content: |
+    ModMail needs the following permissions:
+    - `Manage Channels`
+    - `Manage Messages`
+    - `Manage Roles`
+    - `Read Message History`
+    - `Read Messages`
+    - `Send Messages`
+    - `Embed Links`
+    - `Attach Files`
+    - `Use External Emojis`
+    - `Add Reactions`
+image: "https://media.discordapp.net/attachments/576764854673735680/863863546915979274/unknown-4.png?"
