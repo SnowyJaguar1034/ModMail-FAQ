@@ -4,3 +4,4 @@ content: |
   To change the prefix for your server use the `=prefix <new prefix>` command. This will change the prefix for your server e.g. `=prefix !`.
   To view the current prefix for your server use the `=prefix` command without any arguments.
   If the bot is not responding to `=` you can mention the bot to use commands e.g. `@ModMail prefix`.
+image: https://cdn.discordapp.com/attachments/972598239159283723/986611304540307456/Discord_ZpcIEWvGLQ.png

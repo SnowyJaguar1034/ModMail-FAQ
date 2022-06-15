@@ -2,3 +2,4 @@ title: How do I setup ModMail?
 subtitle: Set up ModMail with an interactive guide.
 content: |
   To setup modmail all you need to use is the `=setup` command. This will create a new category at the bottom of you channel list called `ModMail` and will create a new channel in that category called `modmail-log` where the bot will log tickets being opned and closed.
+image: https://cdn.discordapp.com/attachments/972598239159283723/986610442094936134/Discord_rJLF2pmZKQ.gif

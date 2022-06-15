@@ -6,7 +6,8 @@ content: |
   - Access Roles
   - Ping Roles
   - Logging Channel
-  - Status of `loggingplus`
+  - Status of `loggingplus` (premium)
   - Status of `anonymous`
-  - Greeting Message
-  - Closing Message
+  - Status of `commandonly`
+  - Greeting Message (premium)
+  - Closing Message (premium)

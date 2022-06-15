@@ -1,11 +1,4 @@
-title: How do I create a public template?
+title: It says that my message could not be delivered! What do I do?
 content: |
-  To create a public template of your server go to the server settings inside Discord. Select the "Server Template" section, fill in the fields and click on "Generate Template".
-  Copy the link of the template and go to [xenon.bot/templates/add](<https://xenon.bot/templates/add>) to add the template to the public template list.
-
-  You can update the template name and description in the server settings and sync the template with your server at any point.
-
-  https://wiki.xenon.bot/createtemplate.png
-links:
-  - name: Add template
-    url: https://xenon.bot/templates/add
+  Check your Privacy Settings for the server you're trying to contact. Enable "allow direct messages for server members"
+image: https://cdn.discordapp.com/attachments/972598239159283723/986749079218446377/Discord_8aN2padDIt.gif

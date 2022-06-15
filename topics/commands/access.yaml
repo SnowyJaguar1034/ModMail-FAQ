@@ -1,3 +1,4 @@
 title: How do I let people reply to tickets?
 content: |
   To allow people to respond to tickets they need to have a access role. You can set these with the `=accessrole <role mention|role id|role name>` command. You can set up to 10 different access roles. If a role you are adding by name has a space in the name then you need to wrap the name in `" "` e.g. `=accessrole "Staff Team"`.
+image: https://cdn.discordapp.com/attachments/972598239159283723/986614689725288459/Discord_Pa6RN5xMTH.gif

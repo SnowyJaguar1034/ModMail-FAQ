@@ -1,0 +1,4 @@
+title: How do I force my staff to reply via commands?
+content: |
+    Enable command only mode. You can do so by running `=commandonly`. Once in command only mode, staff members can only send a reply to the users by using the `=reply <message>` command. If they want to reply anonymously, they will need to use `=areply <message>`.
+image: "https://cdn.discordapp.com/attachments/972598239159283723/986617473040257045/Discord_i7mDyLIgjD.png"

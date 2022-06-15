@@ -1,3 +1,4 @@
 title: How do I ping people when a ticket is opened?
 content: |
   To inform people when new tickets are opened they need to have a ping role. You can set these with the `=pingrole <role mention|role id|role name>` command. You can set up to 10 different ping roles. If a role you are adding by name has a space in the name then you need to wrap the name in `" "` e.g. `=pingrole "Staff Team"`.
+image: https://cdn.discordapp.com/attachments/972598239159283723/986615308297043968/Discord_LRlwXEUNOB.gif

@@ -1,3 +1,4 @@
 title: How do I re-create my ModMail category?
 content: |
  To re-create your ModMail category, you can use the `=category [optional name of category]` command. This will delete your current ModMail category and create a new one.
+image: https://cdn.discordapp.com/attachments/972598239159283723/986613581900554281/Discord_LwB01WaT1c.gif

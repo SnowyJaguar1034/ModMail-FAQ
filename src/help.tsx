@@ -89,12 +89,12 @@ function initialMessage(
   return (
     <Message ephemeral={ephemeral} update={update}>
       {`
-Welcome to the **Xenon Help Center**! 
+Welcome to the **ModMail Help Center**! 
 
-This is an **interactive FAQ** where you can find answers to common questions about Xenon. 
-Use the Select Menu below to navigate through the FAQ. You go back to the previous by clicking the "Back" button.
+This is an **interactive FAQ** where you can find answers to common questions about ModMail. 
+Use the Select Menu below to navigate through the FAQ. You go back to the previous menu by clicking the "Back" button.
 
-*If you can't find the answer to your question please open an issue or pull request on [Github](https://github.com/Xenon-Bot/support).*
+*Please understand that most if not all the common questions regarding modmail are answered VIA this interactive FAQ. If you need further assistance on an issue NOT mentioned here, then click on the 🆘 to the #further-assistance channel.*
       `}
       <Select id={topicSelect} min={1} max={1} placeholder="Select a topic ...">
         {topLevelTopics.map((topic) => (
@@ -115,7 +115,7 @@ Use the Select Menu below to navigate through the FAQ. You go back to the previo
 }
 
 export function help(): CommandHandler<Env> {
-  useDescription("Get support for the Xenon Bot");
+  useDescription("Get support for the ModMail Bot");
 
   const topicSelect: string = useSelectMenu((interaction) => {
     // only update if the current message is ephemeral

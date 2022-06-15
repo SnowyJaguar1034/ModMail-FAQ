@@ -1,4 +1,5 @@
 title: How do I manage my logging channel?
 subtitle: How to toggle the logging channel on and off and move it to a different channel
 content: |
-  To change the logging channel you need to have the `=logging [optional logging channel]` command. You can set the logging channel with the `=loggingchannel <channel mention|channel id>` command.
+  via the =logging command, you can recreate, change and disable the logging channel. If your logging channel was deleted, run =logging to disable it and then re-enable it, which should re-create the channel. If you want to use an existing channel, disable logging by running =logging once. Then run =logging #channel_name to re-enable logging and to send logs to an already existing channel of your choice.
+image: https://cdn.discordapp.com/attachments/972598239159283723/986616380528930816/Discord_f4oLWVFsgz.gif

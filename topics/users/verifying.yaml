@@ -1,11 +1,12 @@
-title: How do I load a template?
+title: ModMail told me to verify
+subtitle: I already verified but I still got this message
 content: |
-  You can find templates at [xenon.bot/templates](<https://xenon.bot/templates>). 
-  Either click on "Create New Server" to create a new server from the template or [invite Xenon](<https://xenon.bot/invite>) and use the displayed command to load the template on an existing server.
-
-  You need to be the server owner to load a template by default.
+  Hi, if you can't verify try the following steps
+  1.Check you are logged in to the correct Discord account on your borwser. Click the link [here](<https://discord.com/login>) or the button below to check you are logged in correctly.
+  2. Try opening the verfication link in incognito mode, Yes this works on mobile. Copy paste the following link in your browser: <https://modmail.xyz/login?redirect=/authorized>
+image: https://media.discordapp.net/attachments/576764484065165313/985238549886562374/unknown.png
 links:
-  - name: Find a template
-    url: https://xenon.bot/templates
-  - name: Invite Xenon
-    url: https://xenon.bot/invite
+  - name: Discord Login
+    url: "https://discord.com/login"
+  - name: ModMail Verification
+    url: "https://modmail.xyz/login?redirect=/authorized"

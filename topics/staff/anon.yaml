@@ -1,0 +1,4 @@
+title: Modmail isn't showing anonymous replies to the user.
+content: |
+    First off, make sure whether or not you have anonymous replies enabled. Run `=viewconfig`, and then check whether it says `Enabled` or `Disabled` under "Anonymous Messaging". If it's disabled, enable it via the `=anonymous` command. If anonymous messaging is enabled, then make sure you're not using the commands (or have command only mode). Anonymous messages will only apply to messages sent without commands. If you want to send an anonymous message via commands, use `=areply`.
+image:
