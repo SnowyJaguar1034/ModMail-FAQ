@@ -86,4 +86,4 @@ Congratulations! You have set up everything and you can finally have the bot up 
 
 ## License
 
-This project is licensed under the [BSD 3-Clause [License](license.md)](https://opensource.org/licenses/BSD-3-Clause)
+This project is licensed under the [BSD 3-Clause [License](LICENSE)](https://opensource.org/licenses/BSD-3-Clause)
