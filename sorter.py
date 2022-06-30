@@ -71,11 +71,11 @@ print(f"Sub Options: {sub_options}\n")
 for sub_option in sub_options:
     print(f"Sub Option: {sub_option}\n")
 
-with open("output.json", "w") as file:
+with open("testing-outputs/output.json", "w") as file:
     print("Saving data...")
     json.dump(data_loaded, file, indent=3)
 
-with open("output.txt", "w") as file:
+with open("testing-outputs/output.txt", "w") as file:
     print("Saving outputs...")
     foo = ""
     for option in options:
