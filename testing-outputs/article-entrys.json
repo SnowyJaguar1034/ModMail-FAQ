@@ -1,0 +1,16 @@
+{
+    "type": "ARTICLE",
+    "label": "It says that my message could not be delivered! What do I do?",
+    "description": null,
+    "emoji": null,
+    "title": null,
+    "colour": null,
+    "id": 1.1,
+    "content": "Check your Privacy Settings for the server you're trying to contact. Enable \"allow direct messages for server members\"\n",
+    "images": [
+        {
+            "name": "Privacy Settings",
+            "url": "https://cdn.discordapp.com/attachments/972598239159283723/986749079218446377/Discord_8aN2padDIt.gif"
+        }
+    ]
+}

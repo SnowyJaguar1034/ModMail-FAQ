@@ -1,3 +1,7 @@
+import json
+from platform import java_ver
+from tkinter import W
+
 import yaml
 from discord import Embed, Interaction, SelectOption
 from discord.ui import Select, View
@@ -78,12 +82,15 @@ class AlphaDropdown(Select):
                 self.values[0].split(".")[0]
             ):
                 # print(entry.keys())
+                with open("testing-outputs/article-entrys.json", "w") as stream:
+                    json.dump(entry["Articles"], stream, indent=4)
                 chosen_sub_options.append(entry["Articles"])
 
         print(chosen_sub_options)
 
         await interaction.response.send_message(
-            f"You have selected {self.values[0]}", view=BetaDropdownView()
+            f"You have selected {self.values[0]}",
+            view=BetaDropdownView(chosen_sub_options),
         )
 
         # newdict = {
@@ -107,8 +114,9 @@ class AlphaDropdown(Select):
 
 
 class BetaDropdown(Select):
-    def __init__(self):
-        for entry in chosen_sub_options[0]:
+    def __init__(self, child_options: list[SelectOption]):
+
+        for entry in child_options[0]:
             parents.append(entry["label"])
             sub_option = SelectOption(label=shortener(text=entry["label"]))
             sub_option.value = str(entry["id"])
