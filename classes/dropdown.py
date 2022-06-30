@@ -1,8 +1,5 @@
-import discord
 import yaml
-from attr import s
 from discord import Embed, Interaction, SelectOption
-from discord.ext import commands
 from discord.ui import Select, View
 
 data_loaded = None

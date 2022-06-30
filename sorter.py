@@ -1,10 +1,6 @@
 import json
-from cmath import e
-from re import L
 
 import yaml
-from attr import s
-from black import out
 from discord import SelectOption
 
 data_loaded = None
