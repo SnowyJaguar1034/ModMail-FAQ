@@ -1,5 +1,5 @@
 # FAQ
- Simple Discord.py bot for ModMail support server
+ Simple [Discord.py](https://github.com/Rapptz/discord.py) bot for the ModMail support server
 
 ## Table of Contents
 
@@ -42,7 +42,7 @@ git pull https://github.com/SnowyJaguar/zupie.git master
 
 Configuration is done through a `.env` file. 
 
-You should make a copy of `example.env` and rename it to `.env`. All fields marked with`FILL` must be filled in with the type specfied below:
+You should make a copy of `example.env` and rename it to `.env`. 
 - `TOKEN` : Your bots token as found on the [Discord Developer Portal](https://discord.com/developers/applications)
 - `GUILD` : The ID of the guild that the bot is in.
 - `DESCRIPTION` : The description of your bot
@@ -54,7 +54,8 @@ This is useful if you want to run a variety of python projects on a machine but 
 ```sh
 # Go to your project’s working directory
 $ cd your-bot-source-directory
-# In this example I am using 'env' as the name of my virtual environment however you can use whatever you want
+# In this example I am using 'env' as the name of my virtual
+# environment however you can use whatever you want
 $ python3 -m venv env
 
 # Activate the virtual environment
@@ -70,7 +71,7 @@ $ (env) <Your source directory>pip install -r requirements.txt
 
 ### Installing the Modules
 
-FAQ utilises [discord.py](https://github.com/Rapptz/discord.py) and several other modules to function properly. The list of modules can be found in `requirements.txt` and you can install them with the following command.
+FAQ utilises [discord.py](https://github.com/Rapptz/discord.py) and several other modules to function properly. The list of modules can be found in [`requirements.txt`](requirements.txt) and you can install them with the following command.
 
 ```sh
 pip install -r requirements.txt
@@ -85,4 +86,4 @@ Congratulations! You have set up everything and you can finally have the bot up 
 
 ## License
 
-This project is licensed under the [[BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause)](license.md)
+This project is licensed under the [BSD 3-Clause [License](license.md)](https://opensource.org/licenses/BSD-3-Clause)
