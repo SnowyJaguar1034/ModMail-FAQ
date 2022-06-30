@@ -1,0 +1,51 @@
+- type:  # Can be ARTICLE or CATEGORY
+  label:  # Text longer than 100 characters will have '...' appended to the end in order to fit inside Discords limits | Used to fill in the label on the dropdown menu
+  description:  # Text longer than 100  characters will have '...' appended to the end in order to fit inside Discords limits  | Used to fill in the description on the dropdown menu
+  title:  # Text longer than 256 characters will have '...' appended to the end in order to fit inside Discords limits | Used to fill in the title on the bots message/embed | If left blank defualts to the label
+  colour: # Hex color code | Used to fill in the color on the bots message/embed | If left blank defaults to the bots default color
+  id:  # Each category starts the major number and subsequent Articles start the minor number
+  emoji:
+  content: | # Text longer than 4096 characters will have '...' appended to the end in order to fit inside Discords limits | Used to fill in the content on the bots message/embed | If left blank defualts to the description
+    
+  images:
+  - name: 
+    url: 
+  links:
+  - name: 
+    url:
+    colour: # Hex color code | Used to fill in the color on the bots message/embed | If left blank defaults to the bots default color
+  Articles:
+  - type:  # Can be ARTICLE or CATEGORY
+    label: # Text longer than 100 characters will have '...' appended to the end in order to fit inside Discords limits | Used to fill in the label on the dropdown menu
+    description: # Text longer than 100 characters will have '...' appended to the end in order to fit inside Discords limits | Used to fill in the description on the dropdown menu
+    title: # Text longer than 256 characters will have '...' appended to the end in order to fit inside Discords limits | Used to fill in the title on the bots message/embed | If left blank defualts to the label
+    colour: # Hex color code | Used to fill in the color on the bots message/embed | If left blank defaults to the bots default color
+    id: # Each category starts the major number and subsequent Articles start the minor number
+    emoji:
+    content: | # Text longer than 4096 characters will have '...' appended to the end in order to fit inside Discords limits | Used to fill in the content on the bots message/embed | If left blank defualts to the description
+      
+    images:
+    - name: 
+      url: 
+    links:
+    - name: 
+      url:
+      colour: # Hex color code | Used to fill in the color on the bots message/embed | If left blank defaults to the bots default color
+
+
+  - type: 
+    label:
+    description:
+    title:
+    colour:
+    id:
+    emoji:
+    content: |
+      
+    images:
+    - name: 
+      url: 
+    links:
+    - name: 
+      url:
+      colour:

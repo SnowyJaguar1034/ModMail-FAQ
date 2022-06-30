@@ -1,0 +1,56 @@
+
+Parents: ['Common Troubleshooting for users', 'How To setup certain aspects of ModMail', 'ModMail Premium', 'Useful Links', 'How do I use X command']
+
+Children: ['Solutions for issues users need to fix from their end', 'Setting the bot up, Using a different category, and more', 'Topics related to Modmail premium', 'Examples on how to use each of the configuration commands']
+
+Grandchild: ['Set up ModMail with an interactive guide.', 'How to toggle the logging channel on and off and move it to a different channel', 'How do I make my members anonymous?']
+
+Options: ['Common Troubleshooting for users\nSolutions for issues users need to fix from their end \n', 'How To setup certain aspects of ModMail\nSetting the bot up, Using a different category, and more \n', 'ModMail Premium\nTopics related to Modmail premium \n', 'Useful Links \n', 'How do I use X command\nExamples on how to use each of the configuration commands \n']
+
+Option: Common Troubleshooting for users
+Solutions for issues users need to fix from their end 
+
+Option: How To setup certain aspects of ModMail
+Setting the bot up, Using a different category, and more 
+
+Option: ModMail Premium
+Topics related to Modmail premium 
+
+Option: Useful Links 
+
+Option: How do I use X command
+Examples on how to use each of the configuration commands 
+
+
+Sub Options: [<SelectOption label='It says that my message could not be delivered! What do I do?' value='It says that my message could not be delivered! What do I do?' description=None emoji=None default=False>, <SelectOption label='ModMail told me to verify' value='ModMail told me to verify' description=None emoji=None default=False>, <SelectOption label='Should I give Modmail administrator?' value='Should I give Modmail administrator?' description=None emoji=None default=False>, <SelectOption label="Modmail isn't showing anonymous replies to the user" value="Modmail isn't showing anonymous replies to the user" description=None emoji=None default=False>, <SelectOption label='The bot says that a category is not found, what should I do?' value='The bot says that a category is not found, what should I do?' description=None emoji=None default=False>, <SelectOption label='Why is the custom emote I sent not working?' value='Why is the custom emote I sent not working?' description=None emoji=None default=False>, <SelectOption label='Why is the ModMail log not working?' value='Why is the ModMail log not working?' description=None emoji=None default=False>, <SelectOption label="Why isn't the bot responding to my commands?" value="Why isn't the bot responding to my commands?" description=None emoji=None default=False>, <SelectOption label='What permissions does ModMail need?' value='What permissions does ModMail need?' description=None emoji=None default=False>, <SelectOption label='Where can I buy premium?' value='Where can I buy premium?' description=None emoji=None default=False>, <SelectOption label='What are the perks of Modmail Premium?' value='What are the perks of Modmail Premium?' description=None emoji=None default=False>, <SelectOption label='What payment methods are supported?' value='What payment methods are supported?' description=None emoji=None default=False>, <SelectOption label='Issues with premium' value='Issues with premium' description=None emoji=None default=False>, <SelectOption label='How many servers can I use premium on?' value='How many servers can I use premium on?' description=None emoji=None default=False>, <SelectOption label='Can I have a personalized version of Modmail?' value='Can I have a personalized version of Modmail?' description=None emoji=None default=False>, <SelectOption label='How do I view my server configuration?' value='How do I view my server configuration?' description=None emoji=None default=False>, <SelectOption label='Is there a video that shows me how to use Modmail?' value='Is there a video that shows me how to use Modmail?' description=None emoji=None default=False>, <SelectOption label='How do I setup ModMail?' value='How do I setup ModMail?' description='Set up ModMail with an interactive guide.' emoji=None default=False>, <SelectOption label='How do I view/change the prefix for my server.' value='How do I view/change the prefix for my server.' description=None emoji=None default=False>, <SelectOption label='How do I ping people when a ticket is opened?' value='How do I ping people when a ticket is opened?' description=None emoji=None default=False>, <SelectOption label='How do I manage my logging channel?' value='How do I manage my logging channel?' description='How to toggle the logging channel on and off and move it to a different channel' emoji=None default=False>, <SelectOption label='How do I force my staff to reply via commands?' value='How do I force my staff to reply via commands?' description=None emoji=None default=False>, <SelectOption label='How do I re-create my ModMail category?' value='How do I re-create my ModMail category?' description=None emoji=None default=False>, <SelectOption label='How do I make my staff anonymous?' value='How do I make my staff anonymous?' description='How do I make my members anonymous?' emoji=None default=False>, <SelectOption label='How do I let people reply to tickets?' value='How do I let people reply to tickets?' description=None emoji=None default=False>]
+
+Sub Option: It says that my message could not be delivered! What do I do?
+Sub Option: ModMail told me to verify
+Sub Option: Should I give Modmail administrator?
+Sub Option: Modmail isn't showing anonymous replies to the user
+Sub Option: The bot says that a category is not found, what should I do?
+Sub Option: Why is the custom emote I sent not working?
+Sub Option: Why is the ModMail log not working?
+Sub Option: Why isn't the bot responding to my commands?
+Sub Option: What permissions does ModMail need?
+Sub Option: Where can I buy premium?
+Sub Option: What are the perks of Modmail Premium?
+Sub Option: What payment methods are supported?
+Sub Option: Issues with premium
+Sub Option: How many servers can I use premium on?
+Sub Option: Can I have a personalized version of Modmail?
+Sub Option: How do I view my server configuration?
+Sub Option: Is there a video that shows me how to use Modmail?
+Sub Option: How do I setup ModMail?
+Set up ModMail with an interactive guide.
+Sub Option: How do I view/change the prefix for my server.
+Sub Option: How do I ping people when a ticket is opened?
+Sub Option: How do I manage my logging channel?
+How to toggle the logging channel on and off and move it to a different channel
+Sub Option: How do I force my staff to reply via commands?
+Sub Option: How do I re-create my ModMail category?
+Sub Option: How do I make my staff anonymous?
+How do I make my members anonymous?
+Sub Option: How do I let people reply to tickets?
+
+    

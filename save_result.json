@@ -1,0 +1,67 @@
+{
+    "title": "How To setup certain aspects of ModMail",
+    "ID": 2.0,
+    "subtitle": "Setting the bot up, Using a different category, and more",
+    "type": "CATEGORY",
+    "content": "Will include all / most setup commands + gifs on running each command (or just a simple screenshot)\n",
+    "links": [
+        {
+            "name": "Google",
+            "url": "https://google.com"
+        },
+        {
+            "name": "Bing",
+            "url": "https://www.bing.com/"
+        }
+    ],
+    "Articles": [
+        {
+            "title": "Should I give Modmail administrator?",
+            "ID": 2.1,
+            "type": "ARTICLE",
+            "content": "Providing the administrator role to Modmail would migitate any issues when it comes to permissions, however we do not encourage anyone to provide the administrator permission to ANY bots in your server (unless you have FULL control over the code and how the bot functions). Modmail does not require administrator, however it does require certain permissions to work. Check the \"What permissions does ModMail need?\" option for more information.\n"
+        },
+        {
+            "title": "Modmail isn't showing anonymous replies to the user",
+            "ID": 2.2,
+            "type": "ARTICLE",
+            "content": "First off, make sure whether or not you have anonymous replies enabled. Run `=viewconfig`, and then check whether it says `Enabled` or `Disabled` under \"Anonymous Messaging\". If it's disabled, enable it via the `=anonymous` command. If anonymous messaging is enabled, then make sure you're not using the commands (or have command only mode). Anonymous messages will only apply to messages sent without commands. If you want to send an anonymous message via commands, use `=areply`.\n"
+        },
+        {
+            "title": "The bot says that a category is not found, what should I do?",
+            "ID": 2.3,
+            "type": "ARTICLE",
+            "content": "If you are a server admin; this is telling you that the bot is not set up properly. If you have previously used `=setup`, you might have deleted the category. Either use `=category [name]` to create the category or `=setup` to set up everything again.\n\nIf you a server member; This is telling you that the bot is not set up properly on the server you are trying to contact. Reach out to that servers staff team some alternative way and explain why you were unable to contact ModMail.\n"
+        },
+        {
+            "title": "Why is the custom emote I sent not working?",
+            "ID": 2.3,
+            "type": "ARTICLE",
+            "content": "Due to Discord requirements; the bot needs to be in the server where the emote is from in order to use it. Otherwise, the emote will show up as `:emote_name:` instead of the actual emote.\n"
+        },
+        {
+            "title": "Why is the ModMail log not working?",
+            "ID": 2.4,
+            "type": "ARTICLE",
+            "content": "This is most likely due to a lack of permission. If it still does not work with full permissions, you can try deleting the channel and run `=logging` to enable it again.\n"
+        },
+        {
+            "title": "Why isn't the bot responding to my commands?",
+            "ID": 2.5,
+            "type": "ARTICLE",
+            "content": "Please check the following before asking for help:\n\u00e2\u20ac\u00a2 The bot has Read Messages, Send Messages, and Embed Links permissions.\n\u00e2\u20ac\u00a2 You are using the correct prefix. Use @ModMail prefix to check the prefix.\n\u00e2\u20ac\u00a2 The command you are using is valid. Check using =help <command>.\n\u00e2\u20ac\u00a2 The bot is online. Discord might be having issues, or the bot might be restarting.\n"
+        },
+        {
+            "title": "What permissions does ModMail need?",
+            "ID": 2.6,
+            "type": "ARTICLE",
+            "content": "ModMail needs the following permissions:\n- `Manage Channels`\n- `Manage Messages`\n- `Manage Roles`\n- `Read Message History`\n- `Read Messages`\n- `Send Messages`\n- `Embed Links`\n- `Attach Files`\n- `Use External Emojis`\n- `Add Reactions`\n",
+            "images": [
+                {
+                    "name": "Permissions",
+                    "url": "https://media.discordapp.net/attachments/576764854673735680/863863546915979274/unknown-4.png?"
+                }
+            ]
+        }
+    ]
+}

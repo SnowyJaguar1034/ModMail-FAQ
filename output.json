@@ -1,0 +1,450 @@
+[
+   {
+      "type": "CATEGORY",
+      "label": "Common Troubleshooting for users",
+      "description": "Solutions for issues users need to fix from their end",
+      "emoji": null,
+      "title": null,
+      "test": null,
+      "colour": null,
+      "id": 1.0,
+      "content": "Select an option from the dropdown to find help for a issue you are having.\n",
+      "links": [
+         {
+            "name": "Google",
+            "url": "https://google.com",
+            "colour": null
+         },
+         {
+            "name": "Bing",
+            "url": "https://www.bing.com/",
+            "colour": null
+         }
+      ],
+      "Articles": [
+         {
+            "type": "ARTICLE",
+            "label": "It says that my message could not be delivered! What do I do?",
+            "description": null,
+            "emoji": null,
+            "title": null,
+            "colour": null,
+            "id": 1.1,
+            "content": "Check your Privacy Settings for the server you're trying to contact. Enable \"allow direct messages for server members\"\n",
+            "images": [
+               {
+                  "name": "Privacy Settings",
+                  "url": "https://cdn.discordapp.com/attachments/972598239159283723/986749079218446377/Discord_8aN2padDIt.gif"
+               }
+            ]
+         },
+         {
+            "type": "ARTICLE",
+            "label": "ModMail told me to verify",
+            "description": null,
+            "emoji": null,
+            "title": null,
+            "colour": null,
+            "id": 1.2,
+            "content": "Hi, if you can't verify try the following steps\n1.Check you are logged in to the correct Discord account on your borwser. Click the link [here](<https://discord.com/login>) or the button below to check you are logged in correctly.\n2. Try opening the verfication link in incognito mode, Yes this works on mobile. Copy paste the following link in your browser: <https://modmail.xyz/login?redirect=/authorized>\n",
+            "links": [
+               {
+                  "name": "Discord Login",
+                  "url": "https://discord.com/login",
+                  "colour": null
+               },
+               {
+                  "name": "ModMail Verification",
+                  "url": "https://modmail.xyz/login?redirect=/authorized",
+                  "colour": null
+               }
+            ]
+         }
+      ]
+   },
+   {
+      "type": "CATEGORY",
+      "label": "How To setup certain aspects of ModMail",
+      "description": "Setting the bot up, Using a different category, and more",
+      "emoji": null,
+      "title": null,
+      "colour": null,
+      "id": 2.0,
+      "content": "Will include all / most setup commands + gifs on running each command (or just a simple screenshot)\n",
+      "Articles": [
+         {
+            "type": "ARTICLE",
+            "label": "Should I give Modmail administrator?",
+            "description": null,
+            "emoji": null,
+            "title": null,
+            "colour": null,
+            "id": 2.1,
+            "content": "Providing the administrator role to Modmail would migitate any issues when it comes to permissions, however we do not encourage anyone to provide the administrator permission to ANY bots in your server (unless you have FULL control over the code and how the bot functions). Modmail does not require administrator, however it does require certain permissions to work. Check the \"What permissions does ModMail need?\" option for more information.\n"
+         },
+         {
+            "type": "ARTICLE",
+            "label": "Modmail isn't showing anonymous replies to the user",
+            "description": null,
+            "emoji": null,
+            "title": null,
+            "colour": null,
+            "id": 2.2,
+            "content": "First off, make sure whether or not you have anonymous replies enabled. Run `=viewconfig`, and then check whether it says `Enabled` or `Disabled` under \"Anonymous Messaging\". If it's disabled, enable it via the `=anonymous` command. If anonymous messaging is enabled, then make sure you're not using the commands (or have command only mode). Anonymous messages will only apply to messages sent without commands. If you want to send an anonymous message via commands, use `=areply`.\n"
+         },
+         {
+            "type": "ARTICLE",
+            "label": "The bot says that a category is not found, what should I do?",
+            "description": null,
+            "emoji": null,
+            "title": null,
+            "colour": null,
+            "id": 2.3,
+            "content": "If you are a server admin; this is telling you that the bot is not set up properly. If you have previously used `=setup`, you might have deleted the category. Either use `=category [name]` to create the category or `=setup` to set up everything again.\n\nIf you a server member; This is telling you that the bot is not set up properly on the server you are trying to contact. Reach out to that servers staff team some alternative way and explain why you were unable to contact ModMail.\n"
+         },
+         {
+            "type": "ARTICLE",
+            "label": "Why is the custom emote I sent not working?",
+            "description": null,
+            "emoji": null,
+            "title": null,
+            "colour": null,
+            "id": 2.4,
+            "content": "Due to Discord requirements; the bot needs to be in the server where the emote is from in order to use it. Otherwise, the emote will show up as `:emote_name:` instead of the actual emote.\n"
+         },
+         {
+            "type": "ARTICLE",
+            "label": "Why is the ModMail log not working?",
+            "description": null,
+            "emoji": null,
+            "title": null,
+            "colour": null,
+            "id": 2.5,
+            "content": "This is most likely due to a lack of permission. If it still does not work with full permissions, you can try deleting the channel and run `=logging` to enable it again.\n"
+         },
+         {
+            "type": "ARTICLE",
+            "label": "Why isn't the bot responding to my commands?",
+            "description": null,
+            "emoji": null,
+            "title": null,
+            "colour": null,
+            "id": 2.6,
+            "content": "Please check the following before asking for help:\n\u00e2\u20ac\u00a2 The bot has Read Messages, Send Messages, and Embed Links permissions.\n\u00e2\u20ac\u00a2 You are using the correct prefix. Use @ModMail prefix to check the prefix.\n\u00e2\u20ac\u00a2 The command you are using is valid. Check using =help <command>.\n\u00e2\u20ac\u00a2 The bot is online. Discord might be having issues, or the bot might be restarting.\n"
+         },
+         {
+            "type": "ARTICLE",
+            "label": "What permissions does ModMail need?",
+            "description": null,
+            "emoji": null,
+            "title": null,
+            "colour": null,
+            "id": 2.7,
+            "content": "ModMail needs the following permissions:\n- `Manage Channels`\n- `Manage Messages`\n- `Manage Roles`\n- `Read Message History`\n- `Read Messages`\n- `Send Messages`\n- `Embed Links`\n- `Attach Files`\n- `Use External Emojis`\n- `Add Reactions`\n",
+            "images": [
+               {
+                  "name": "Permissions",
+                  "url": "https://media.discordapp.net/attachments/576764854673735680/863863546915979274/unknown-4.png?"
+               }
+            ]
+         }
+      ]
+   },
+   {
+      "type": "CATEGORY",
+      "label": "ModMail Premium",
+      "description": "Topics related to Modmail premium",
+      "emoji": null,
+      "title": null,
+      "colour": null,
+      "id": 3.0,
+      "content": "Modmail premium is a service that allows users to purchase premium features on Modmail.\n",
+      "Articles": [
+         {
+            "type": "ARTICLE",
+            "label": "Where can I buy premium?",
+            "description": null,
+            "emoji": null,
+            "title": null,
+            "colour": null,
+            "id": 3.1,
+            "content": "You can buy premium on Modmails website on the [premium page](https://modmail.xyz/premium).\n",
+            "links": [
+               {
+                  "name": "Buy Premium",
+                  "url": "https://modmail.xyz/premium"
+               }
+            ]
+         },
+         {
+            "type": "ARTICLE",
+            "label": "What are the perks of Modmail Premium?",
+            "description": null,
+            "emoji": null,
+            "title": null,
+            "colour": null,
+            "id": 3.2,
+            "content": "Depending on the tier of premium purchased users will get access to premium features on 1 server (<@&576756461267451934>), 3 servers (<@&576754574346551306>) and 5 servers (<@&576754671620980740>).\nUsers can manage their premium with the following commands:\n- `=premiumassign <server id>`\n- `=premiumremove <server id>`\n- `=premiumslist`\n\nUsers will also get access to the ticket snippet functionality. This allows staff to easily and quickly reply to users with a pre-defined response. The commands to manage snippets are:\n- `=viewsnippet [optional snippet name]`\n- `=snippetadd <snippet name> <snippet content>`\n- `=snippetremove <snippet name>`\n\nTo use a snippet in a ticket staff can use the following commands:\n- `=snippet <snippet name>` / `=a <snippet name>`\n- `=asnippet <snippet name>` / `=as <snippet name>`\n"
+         },
+         {
+            "type": "ARTICLE",
+            "label": "What payment methods are supported?",
+            "description": null,
+            "emoji": null,
+            "title": null,
+            "colour": null,
+            "id": 3.3,
+            "content": "ModMail currently only supports PayPal.\n"
+         },
+         {
+            "type": "ARTICLE",
+            "label": "Issues with premium",
+            "description": null,
+            "emoji": null,
+            "title": null,
+            "colour": null,
+            "id": 3.4,
+            "content": "Any user who bought premium will have one of the following roles depending on the tier purchased: <@&576756461267451934>, <@&576754574346551306> and <@&576754671620980740>.\nThis enables them to use the premium management commands to assign/remove premium from servers as well as check which servers they have premium on.\nThese commands are found on page 7 of the `=help` command, the second to last page\n\n**Users must have joined this server before purchasing otherwise they will not have received the patron role and will not be able to use the premium management commands**\n\n*Note: We can manually assign patron roles to those who do not join before purchase however the user will need to provide proof of payment via a ModMail ticket and the process could take a few hours while we wait for an administrator to be available.*\n",
+            "images": [
+               {
+                  "name": "Pre payment confirmation",
+                  "url": "https://media.discordapp.net/attachments/576765224460353589/929004300951253012/unknown.png"
+               }
+            ],
+            "links": [
+               {
+                  "name": "Premium",
+                  "url": "https://modmail.xyz/premiumslist",
+                  "colour": null
+               }
+            ]
+         },
+         {
+            "type": "ARTICLE",
+            "label": "How many servers can I use premium on?",
+            "description": null,
+            "emoji": null,
+            "title": null,
+            "colour": null,
+            "id": 3.5,
+            "content": "That depends on the tier of modmail you purchased.\nBasic: 1 server\nPro: 3 servers\nPlus: 5 servers\n"
+         },
+         {
+            "type": "ARTICLE",
+            "label": "Can I have a personalized version of Modmail?",
+            "description": null,
+            "emoji": null,
+            "title": null,
+            "colour": null,
+            "id": 3.6,
+            "content": "You can contact <@381998065327931392> (`James [a_leon]#6196`) for a custom instance. The pricing is at $10/month or $60/year.\nThese are the benefits of a custom instance:\n- Custom username, avatar and status message.\n- All the premium features listed here.\n- No confirmation messages.\n- Commands to create tickets with users.\n- Requring a command to send messages.\n- Optional: Custom commands by SnowyJaguar#1034, within reason.\n"
+         }
+      ]
+   },
+   {
+      "type": "ARTICLE",
+      "label": "Useful Links",
+      "description": null,
+      "emoji": null,
+      "title": null,
+      "colour": null,
+      "id": 4.0,
+      "content": "Useful links for Modmail.\n",
+      "links": [
+         {
+            "name": "Modmail Website",
+            "url": "https://modmail.xyz",
+            "colour": null
+         },
+         {
+            "name": "Support Server (wjWJwJB)",
+            "url": "https://discord.gg/wjWJwJB",
+            "colour": null
+         },
+         {
+            "name": "GitHub",
+            "url": "https://github.com/chamburr/modmail",
+            "colour": null
+         },
+         {
+            "name": "ModMail Invite",
+            "url": "https://modmail.xyz/invite",
+            "colour": null
+         }
+      ]
+   },
+   {
+      "type": "CATEGORY",
+      "label": "How do I use X command",
+      "description": "Examples on how to use each of the configuration commands",
+      "title": null,
+      "colour": null,
+      "id": 5.0,
+      "emoji": null,
+      "content": "Select a option below to find out how to use a command.\n",
+      "links": [
+         {
+            "name": "ModMail Commands",
+            "url": "https://modmail.xyz/commands",
+            "colour": null
+         }
+      ],
+      "Articles": [
+         {
+            "type": "ARTICLE",
+            "label": "How do I view my server configuration?",
+            "description": null,
+            "title": null,
+            "colour": null,
+            "id": 5.1,
+            "emoji": null,
+            "content": "To view the server configuration, use the `=viewconfig` command. This will show you the current:\n- Prefix\n- Category\n- Access Roles\n- Ping Roles\n- Logging Channel\n- Status of `loggingplus` (premium)\n- Status of `anonymous`\n- Status of `commandonly`\n- Greeting Message (premium)\n- Closing Message (premium)\n",
+            "images": [
+               {
+                  "name": null,
+                  "url": null
+               }
+            ],
+            "links": [
+               {
+                  "name": null,
+                  "url": null,
+                  "colour": null
+               }
+            ]
+         },
+         {
+            "type": "ARTICLE",
+            "label": "Is there a video that shows me how to use Modmail?",
+            "description": null,
+            "title": null,
+            "colour": null,
+            "id": 5.2,
+            "emoji": null,
+            "content": "Yes! Click the button below to watch the video.\n"
+         },
+         {
+            "type": "ARTICLE",
+            "label": "How do I setup ModMail?",
+            "description": "Set up ModMail with an interactive guide.",
+            "title": null,
+            "colour": null,
+            "id": 5.3,
+            "emoji": null,
+            "content": "To setup modmail all you need to use is the `=setup` command. This will create a new category at the bottom of you channel list called `ModMail` and will create a new channel in that category called `modmail-log` where the bot will log tickets being opned and closed.\n",
+            "images": [
+               {
+                  "name": "Setup GIF",
+                  "url": "https://cdn.discordapp.com/attachments/972598239159283723/986610442094936134/Discord_rJLF2pmZKQ.gif"
+               }
+            ]
+         },
+         {
+            "type": "ARTICLE",
+            "label": "How do I view/change the prefix for my server.",
+            "description": null,
+            "title": null,
+            "colour": null,
+            "id": 5.4,
+            "emoji": null,
+            "content": "To change the prefix for your server use the `=prefix <new prefix>` command. This will change the prefix for your server e.g. `=prefix !`.\nTo view the current prefix for your server use the `=prefix` command without any arguments.\nIf the bot is not responding to `=` you can mention the bot to use commands e.g. `@ModMail prefix`.\n",
+            "images": [
+               {
+                  "name": "Prefix Usage Example",
+                  "url": "https://cdn.discordapp.com/attachments/972598239159283723/986611304540307456/Discord_ZpcIEWvGLQ.png"
+               }
+            ]
+         },
+         {
+            "type": "ARTICLE",
+            "label": "How do I ping people when a ticket is opened?",
+            "description": null,
+            "title": null,
+            "colour": null,
+            "id": 5.5,
+            "emoji": null,
+            "content": "To inform people when new tickets are opened they need to have a ping role. You can set these with the `=pingrole <role mention|role id|role name>` command. You can set up to 10 different ping roles. If a role you are adding by name has a space in the name then you need to wrap the name in `\" \"` e.g. `=pingrole \"Staff Team\"`.\n",
+            "images": [
+               {
+                  "name": "Ping Role Usage Example",
+                  "url": "https://cdn.discordapp.com/attachments/972598239159283723/986615308297043968/Discord_LRlwXEUNOB.gif"
+               }
+            ]
+         },
+         {
+            "type": "ARTICLE",
+            "label": "How do I manage my logging channel?",
+            "description": "How to toggle the logging channel on and off and move it to a different channel",
+            "title": null,
+            "colour": null,
+            "id": 5.6,
+            "emoji": null,
+            "content": "via the =logging command, you can recreate, change and disable the logging channel. If your logging channel was deleted, run =logging to disable it and then re-enable it, which should re-create the channel. If you want to use an existing channel, disable logging by running =logging once. Then run =logging #channel_name to re-enable logging and to send logs to an already existing channel of your choice.\n",
+            "images": [
+               {
+                  "name": "Logging Usage Example",
+                  "url": "https://cdn.discordapp.com/attachments/972598239159283723/986616380528930816/Discord_f4oLWVFsgz.gif"
+               }
+            ]
+         },
+         {
+            "type": "ARTICLE",
+            "label": "How do I force my staff to reply via commands?",
+            "description": null,
+            "title": null,
+            "colour": null,
+            "id": null,
+            "emoji": null,
+            "content": "Enable command only mode. You can do so by running `=commandonly`. Once in command only mode, staff members can only send a reply to the users by using the `=reply <message>` command. If they want to reply anonymously, they will need to use `=areply <message>`.\n",
+            "images": [
+               {
+                  "name": "Command-Only Usage Example",
+                  "url": "https://cdn.discordapp.com/attachments/972598239159283723/986617473040257045/Discord_i7mDyLIgjD.png"
+               }
+            ]
+         },
+         {
+            "type": "ARTICLE",
+            "label": "How do I re-create my ModMail category?",
+            "description": null,
+            "title": null,
+            "colour": null,
+            "id": null,
+            "emoji": null,
+            "content": "To re-create your ModMail category, you can use the `=category [optional name of category]` command. This will delete your current ModMail category and create a new one.\n",
+            "images": [
+               {
+                  "name": "Category Usage Example",
+                  "url": "https://cdn.discordapp.com/attachments/972598239159283723/986613581900554281/Discord_LwB01WaT1c.gif"
+               }
+            ]
+         },
+         {
+            "type": "ARTICLE",
+            "label": "How do I make my staff anonymous?",
+            "description": "How do I make my members anonymous?",
+            "title": null,
+            "colour": null,
+            "id": null,
+            "emoji": null,
+            "content": "To make your staff members appear as anonymous, you can use the `=anonymous` toggle command. Note that this will only work on messages sent normally without the use of commands. If you want an anonymous reply via commands, use `=areply`. As for making a member's messages anonymous,  there's no way to do that as this would be too exploitable.\n"
+         },
+         {
+            "type": "ARTICLE",
+            "label": "How do I let people reply to tickets?",
+            "description": null,
+            "title": null,
+            "colour": null,
+            "id": null,
+            "emoji": null,
+            "content": "To allow people to respond to tickets they need to have a access role. You can set these with the `=accessrole <role mention|role id|role name>` command. You can set up to 10 different access roles. If a role you are adding by name has a space in the name then you need to wrap the name in `\" \"` e.g. `=accessrole \"Staff Team\"`.\n",
+            "images": [
+               {
+                  "name": "Access Role Usage Example",
+                  "url": "https://cdn.discordapp.com/attachments/972598239159283723/986614689725288459/Discord_Pa6RN5xMTH.gif"
+               }
+            ]
+         }
+      ]
+   }
+]
