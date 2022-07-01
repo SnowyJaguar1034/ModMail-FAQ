@@ -1,10 +1,12 @@
 import json
-from platform import java_ver
-from tkinter import W
+from logging import getLogger
+from re import L
 
 import yaml
 from discord import Embed, Interaction, SelectOption
 from discord.ui import Select, View
+
+log = getLogger(__name__)
 
 data_loaded = None
 options = []
@@ -86,7 +88,7 @@ class AlphaDropdown(Select):
                     json.dump(entry["Articles"], stream, indent=4)
                 chosen_sub_options.append(entry["Articles"])
 
-        print(chosen_sub_options)
+        log.info(f"Chosen sub options: {chosen_sub_options}")
 
         await interaction.response.send_message(
             f"You have selected {self.values[0]}",
@@ -114,9 +116,13 @@ class AlphaDropdown(Select):
 
 
 class BetaDropdown(Select):
-    def __init__(self, child_options: list[SelectOption]):
-
-        for entry in child_options[0]:
+    def __init__(self, options: list[SelectOption], **kwargs):
+        super().__init__(options=options, **kwargs)
+        log.info(f"Chosen sub options: {options}")
+        for entry in options:
+            log.info(f"Entry: {entry}")
+            for option in entry:
+                log.info(f"Option: {option}")
             parents.append(entry["label"])
             sub_option = SelectOption(label=shortener(text=entry["label"]))
             sub_option.value = str(entry["id"])
@@ -127,7 +133,7 @@ class BetaDropdown(Select):
                 sub_option.emoji = entry["emoji"]
             sub_options.append(sub_option)
 
-        print(sub_options)
+        log.info(f"sub options: {sub_options}")
 
         super().__init__(
             placeholder="Select a topic...",
@@ -148,6 +154,7 @@ class AlphaDropdownView(View):
 
 
 class BetaDropdownView(View):
-    def __init__(self):
+    def __init__(self, options: list[SelectOption]):
         super().__init__()
-        self.add_item(BetaDropdown())
+        log.info(f"Options: {options}")
+        self.add_item(BetaDropdown(options))

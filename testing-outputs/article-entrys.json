@@ -1,16 +1,40 @@
-{
-    "type": "ARTICLE",
-    "label": "It says that my message could not be delivered! What do I do?",
-    "description": null,
-    "emoji": null,
-    "title": null,
-    "colour": null,
-    "id": 1.1,
-    "content": "Check your Privacy Settings for the server you're trying to contact. Enable \"allow direct messages for server members\"\n",
-    "images": [
-        {
-            "name": "Privacy Settings",
-            "url": "https://cdn.discordapp.com/attachments/972598239159283723/986749079218446377/Discord_8aN2padDIt.gif"
-        }
-    ]
-}
+[
+    {
+        "type": "ARTICLE",
+        "label": "It says that my message could not be delivered! What do I do?",
+        "description": null,
+        "emoji": null,
+        "title": null,
+        "colour": null,
+        "id": 1.1,
+        "content": "Check your Privacy Settings for the server you're trying to contact. Enable \"allow direct messages for server members\"\n",
+        "images": [
+            {
+                "name": "Privacy Settings",
+                "url": "https://cdn.discordapp.com/attachments/972598239159283723/986749079218446377/Discord_8aN2padDIt.gif"
+            }
+        ]
+    },
+    {
+        "type": "ARTICLE",
+        "label": "ModMail told me to verify",
+        "description": null,
+        "emoji": null,
+        "title": null,
+        "colour": null,
+        "id": 1.2,
+        "content": "Hi, if you can't verify try the following steps\n1.Check you are logged in to the correct Discord account on your borwser. Click the link [here](<https://discord.com/login>) or the button below to check you are logged in correctly.\n2. Try opening the verfication link in incognito mode, Yes this works on mobile. Copy paste the following link in your browser: <https://modmail.xyz/login?redirect=/authorized>\n",
+        "links": [
+            {
+                "name": "Discord Login",
+                "url": "https://discord.com/login",
+                "colour": null
+            },
+            {
+                "name": "ModMail Verification",
+                "url": "https://modmail.xyz/login?redirect=/authorized",
+                "colour": null
+            }
+        ]
+    }
+]
