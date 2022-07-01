@@ -119,18 +119,18 @@ class BetaDropdown(Select):
     def __init__(self, options: list[SelectOption], **kwargs):
         super().__init__(options=options, **kwargs)
         log.info(f"Chosen sub options: {options}")
-        for entry in options:
-            log.info(f"Entry: {entry}")
-            for option in entry:
+        for option in options:
+            log.info(f"Option: {option}")
+            for entry in option:
                 log.info(f"Option: {option}")
-            parents.append(entry["label"])
-            sub_option = SelectOption(label=shortener(text=entry["label"]))
-            sub_option.value = str(entry["id"])
-            if checkKey(dict=entry, key="description") == True:
-                child.append(entry["description"])
-                sub_option.description = shortener(text=entry["description"])
-            if checkKey(dict=entry, key="emoji") == True:
-                sub_option.emoji = entry["emoji"]
+                parents.append(entry["label"])
+                sub_option = SelectOption(label=shortener(text=entry["label"]))
+                sub_option.value = str(entry["id"])
+                if checkKey(dict=entry, key="description") == True:
+                    child.append(entry["description"])
+                    sub_option.description = shortener(text=entry["description"])
+                if checkKey(dict=entry, key="emoji") == True:
+                    sub_option.emoji = entry["emoji"]
             sub_options.append(sub_option)
 
         log.info(f"sub options: {sub_options}")
