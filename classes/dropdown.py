@@ -1,67 +1,27 @@
 import json
 from logging import getLogger
+from netrc import netrc
 from re import L
 
+import discord
+import topics
 import yaml
 from discord import Embed, Interaction, SelectOption
-from discord.ui import Select, View
+from discord.ui import Button, Select, View
 
 log = getLogger(__name__)
 
-data_loaded = None
-options = []
-sub_options = []
-chosen_sub_options = []
-parents = []
-child = []
-grandchild = []
-
-
-def shortener(text: str, length: int = 100, dots: bool = True) -> str:
-    if text == None:
-        return ""
-    elif len(text) > length:
-        if dots == True:
-            output = text[: length - 3] + "..."
-        else:
-            output = text[:length]
-    else:
-        output = text
-    return output
-
-
-def checkKey(dict: dict, key: str) -> bool:
-    return dict.get(key) != None
-
-
-with open("topics.yaml", "r") as stream:
-    print("Loading data...")
-    data_loaded = yaml.safe_load(stream)
 
 # Defines a custom Select containing colour options that the user can choose. The callback function of this class is called when the user changes their choice
 class AlphaDropdown(Select):
     def __init__(self):
-        for entry in data_loaded:
-            parents.append(entry["label"])
-            option = SelectOption(label=shortener(text=entry["label"]))
-            option.value = str(entry["id"])
-            if checkKey(dict=entry, key="description") == True:
-                child.append(entry["description"])
-                option.description = shortener(text=entry["description"])
-            if checkKey(dict=entry, key="emoji") == True:
-                option.emoji = entry["emoji"]
-            options.append(option)
-            if entry["type"] == "CATEGORY":
-                for article in entry["Articles"]:
-                    label = shortener(text=article["label"])
-                    sub_option = SelectOption(label=label)
-                    if checkKey(dict=entry, key="description") == True:
-                        description = shortener(text=article["description"])
-                        grandchild.append(description)
-                        sub_option.description = description
-                    if checkKey(dict=entry, key="emoji") == True:
-                        sub_option.emoji = article["emoji"]
-                    sub_options.append(sub_option)
+        options = [
+            SelectOption(
+                label=article.label,
+                description=article.description,
+            )
+            for article in topics.initial.articles
+        ]
 
         # The placeholder is what will be shown when no option is chosen
         # The min and max values indicate we can only pick one of the three options
@@ -74,87 +34,76 @@ class AlphaDropdown(Select):
         )
 
     async def callback(self, interaction: Interaction):
-        # Use the interaction object to send a response message containing
-        # the user's favourite colour or choice. The self object refers to the
-        # Select object, and the values attribute gets a list of the user's
-        # selected options. We only want the first one.
-        temp = self.values[0].split(".")
-        for entry in data_loaded:
-            if entry["type"] == "CATEGORY" and str(entry["id"]).split(".")[0] == str(
-                self.values[0].split(".")[0]
-            ):
-                # print(entry.keys())
-                with open("testing-outputs/article-entrys.json", "w") as stream:
-                    json.dump(entry["Articles"], stream, indent=4)
-                chosen_sub_options.append(entry["Articles"])
+        # Figure out the corresponding article to their selection
+        value = self.values[0]
+        if value == "Common Troubleshooting for users":
+            menu = topics.initial.articles[0]
+        elif value == "How to setup certain aspects of ModMail":
+            menu = topics.initial.articles[1]
+        elif value == "ModMail Premium":
+            menu = topics.initial.articles[2]
+        elif value == "How do I use X command":
+            menu = topics.initial.articles[3]
 
-        log.info(f"Chosen sub options: {chosen_sub_options}")
-
-        await interaction.response.send_message(
-            f"You have selected {self.values[0]}",
-            view=BetaDropdownView(chosen_sub_options),
+        embed = Embed(
+            title=menu.label, description=f"{menu.description}\n{menu.content}"
         )
 
-        # newdict = {
-        #     "type": "CATEGORY",
-        #     "label": "How To setup certain aspects of ModMail",
-        #     "id": 2.0,
-        #     "Articles": [
-        #         {
-        #             "type": "ARTICLE",
-        #             "label": "Should I give Modmail administrator?",
-        #             "id": 2.1,
-        #         },
-        #     ],
-        # }
-        # temp = newdict["Articles"]
-        # print(temp)
-        # for that_dict in temp:
-        #     print("Hello World")
-        #     if that_dict["id"] == "2.1":
-        #         print(f"found it! {that_dict['label']}")
+        # Get the list of sub-questions to display, based on their selection
+        suboption_mapping = {
+            "Common Troubleshooting for users": topics.trouleshooting,
+            "How to setup certain aspects of ModMail": topics.aspects,
+            "ModMail Premium": topics.premium,
+            "How do I use X command": topics.how_to_commands,
+        }
+
+        options_to_show = suboption_mapping.get(self.values[0])
+
+        # Adds each sub question to the select menu options
+        next_options = [
+            SelectOption(
+                label=question.label,
+            )
+            for question in options_to_show.options
+        ]
+
+        view = View()
+        view.add_item(BetaDropdown(options_to_show, next_options))
+        embed = Embed(
+            title=self.values[0],
+            description="\n\n".join(
+                [f"**{article.label}**" for article in options_to_show.options]
+            ),
+        )
+        await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
 
 class BetaDropdown(Select):
-    def __init__(self, options: list[SelectOption], **kwargs):
-        super().__init__(options=options, **kwargs)
-        log.info(f"Chosen sub options: {options}")
-        for option in options:
-            log.info(f"Option: {option}")
-            for entry in option:
-                log.info(f"Option: {option}")
-                parents.append(entry["label"])
-                sub_option = SelectOption(label=shortener(text=entry["label"]))
-                sub_option.value = str(entry["id"])
-                if checkKey(dict=entry, key="description") == True:
-                    child.append(entry["description"])
-                    sub_option.description = shortener(text=entry["description"])
-                if checkKey(dict=entry, key="emoji") == True:
-                    sub_option.emoji = entry["emoji"]
-            sub_options.append(sub_option)
-
-        log.info(f"sub options: {sub_options}")
-
+    def __init__(self, sub_option, options: list[SelectOption]):
+        self.sub_option = sub_option
         super().__init__(
-            placeholder="Select a topic...",
+            placeholder="Select a question...",
             min_values=1,
             max_values=1,
-            options=sub_options,
+            options=options,
         )
 
     async def callback(self, interaction: Interaction):
+        embed = Embed(title=self.values[0])
+        for question in self.sub_option.options:
+            if question.label == self.values[0]:
+                embed.description = question.content
 
-        await interaction.response.send_message(f"You have selected {self.values[0]}")
+                if question.image:
+                    embed.set_image(url=question.image)
 
+                view = discord.ui.View()
+                if question.links:
+                    url_buttons = []
+                    for key, value in question.links.items():
+                        url_buttons.append(Button(label=key, url=value))
 
-class AlphaDropdownView(View):
-    def __init__(self):
-        super().__init__()
-        self.add_item(AlphaDropdown())
+                    for button in url_buttons:
+                        view.add_item(button)
 
-
-class BetaDropdownView(View):
-    def __init__(self, options: list[SelectOption]):
-        super().__init__()
-        log.info(f"Options: {options}")
-        self.add_item(BetaDropdown(options))
+        await interaction.response.send_message(embed=embed, ephemeral=True, view=view)
