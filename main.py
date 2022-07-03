@@ -11,8 +11,9 @@ from logging import (
 
 from discord import Activity, ActivityType, Embed, Intents, Interaction
 from discord.ext import commands
+from discord.ui import View
 
-from classes.dropdown import AlphaDropdownView
+from classes.dropdown import AlphaDropdown
 from classes.faq import FAQ_Client
 
 intents = Intents.default()
@@ -52,12 +53,13 @@ data_loaded = None
 
 @client.tree.command()
 async def faq(interaction: Interaction):
-    view = AlphaDropdownView()
+    view = View()
+    view.add_item(AlphaDropdown())
     embed = Embed(
         title="Welcome to the ModMail Help Center!",
         description='This is an **interactive FAQ** where you can find answers to common questions about ModMail. Use the Select Menu below to navigate through the FAQ. You can go back to the previous topic by clicking the "Back" button',
     )
-    await interaction.response.send_message(embed=embed, view=view)
+    await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
 
 if __name__ == "__main__":
