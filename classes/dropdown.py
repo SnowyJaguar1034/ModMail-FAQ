@@ -2,7 +2,7 @@ from logging import getLogger
 from typing import Union
 
 import topics
-from discord import Embed, Interaction, SelectOption
+from discord import Embed, Interaction, PartialEmoji, SelectOption
 from discord.ui import Button, Select, View
 from topics import aspects, how_to_commands, premium, trouleshooting
 
@@ -16,8 +16,8 @@ class AlphaDropdown(Select):
             SelectOption(
                 label=article.label,
                 description=article.description,
-                emoji=article.emoji,
-                value=article.id,
+                emoji=PartialEmoji.from_str(article.emoji) if article.emoji else None,
+                value=str(article.id),
             )
             for article in topics.initial.articles
         ]
@@ -40,20 +40,20 @@ class AlphaDropdown(Select):
         #     menu = topics.initial.articles[0]
         # elif self.values[0] == "How to setup certain aspects of ModMail":
         #     menu = topics.initial.articles[1]
-        # elif self.values[0] == "ModMail Premium":
+        # elif self.values[0] == "ModMail Premium":self.values[0]
         #     menu = topics.initial.articles[2]
         # elif self.values[0] == "How do I use X command":
         #     menu = topics.initial.articles[3]
-
-        if self.values[0].value == 1.0:
+        # log.critical(f"Selection: {self.values[0]} (Type: {type(self.values[0])})")
+        if float(self.values[0]) == 1.0:
             menu = topics.initial.articles[0]
-        elif self.values[0].value == 2.0:
+        elif float(self.values[0]) == 2.0:
             menu = topics.initial.articles[1]
-        elif self.values[0].value == 3.0:
+        elif float(self.values[0]) == 3.0:
             menu = topics.initial.articles[2]
-        elif self.values[0].value == 4.0:
+        elif float(self.values[0]) == 4.0:
             menu = topics.initial.articles[3]
-        elif self.values[0].value == 5.0:
+        elif float(self.values[0]) == 5.0:
             menu = topics.initial.articles[4]
 
         embed = Embed(
@@ -75,7 +75,7 @@ class AlphaDropdown(Select):
         }
 
         # Figure out the sub-questions to display
-        options_to_show = suboption_mapping.get(self.values[0].value)
+        options_to_show = suboption_mapping.get(float(self.values[0]))
 
         # Adds each sub question to the select menu options
         next_options: list[SelectOption] = [
@@ -88,6 +88,9 @@ class AlphaDropdown(Select):
         # Create a View object and generate the embed with the sub-questions
         view = View()
         view.add_item(BetaDropdown(options_to_show, next_options))
+        log.critical(f"Selection: {self.values} (Type: {type(self.values[0])})")
+        for entry in self.values:
+            log.critical(f"Selection: {entry} (Type: {type(entry)})")
         embed = Embed(
             title=self.values[0],
             description="\n\n".join(
@@ -100,7 +103,7 @@ class AlphaDropdown(Select):
 class BetaDropdown(Select):
     def __init__(
         self,
-        sub_option: Union[trouleshooting, aspects, premium, how_to_commands],
+        sub_option,  # Union[trouleshooting, aspects, premium, how_to_commands],
         options: list[SelectOption],
     ):
         self.sub_option = sub_option
@@ -116,7 +119,7 @@ class BetaDropdown(Select):
         for question in self.sub_option.options:
 
             # Figure out which sub question was chosen and get the content (answer) of the question
-            if question.id == self.values[0].value:
+            if question.label == self.values[0]:  # .value
                 embed.description = question.content
 
                 if question.image:

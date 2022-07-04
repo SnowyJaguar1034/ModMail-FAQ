@@ -12,15 +12,20 @@ from classes.faq import FAQ_Client
 intents = Intents.default()
 intents.message_content = True
 intents.members = True
+intents.emojis = True
 
 client = FAQ_Client(
     intents=intents,
-    owner_ids=["Owners"],
-    command_prefix=commands.when_mentioned,
-    case_insensitive=True,
 )
 client.activity = Activity(name=client.config.activity, type=ActivityType.watching)
 client.description = client.config.description
+client.owner_ids = (
+    [owner_id for owner_id in client.config.owners.strip().split(",")]
+    if client.config.owners is not None
+    else []
+)
+client.case_insensitive = True
+client.command_prefix = commands.when_mentioned_or("!")
 
 basicConfig(level=INFO)
 logger = getLogger()

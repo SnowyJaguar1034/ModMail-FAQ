@@ -39,7 +39,7 @@ initial = Category(
             id=1.0,
             description="Solutions for issues users need to fix from their end",
             content="Select an option from the dropdown to find help for a issue you are having.",
-            emoji=":2021_Snowsgiving_Emojis_001_Snow:",
+            emoji="📝",
         ),
         Topic(
             label="How to setup certain aspects of ModMail",
