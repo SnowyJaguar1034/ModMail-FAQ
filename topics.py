@@ -20,11 +20,11 @@ class SubOptions:
 @dataclass(kw_only=True)
 class Topic:
     label: str
-    id: int
+    id: float
     description: str
     content: str
     emoji: str = None
-    Links: dict[str, str] = None
+    links: dict[str, str] = None
 
 
 @dataclass
