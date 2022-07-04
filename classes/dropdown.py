@@ -1,20 +1,17 @@
-import json
 from logging import getLogger
-from netrc import netrc
-from re import L
 
 import discord
 import topics
-import yaml
 from discord import Embed, Interaction, SelectOption
 from discord.ui import Button, Select, View
+from topics import aspects, how_to_commands, premium, trouleshooting
 
 log = getLogger(__name__)
 
 
 # Defines a custom Select containing colour options that the user can choose. The callback function of this class is called when the user changes their choice
 class AlphaDropdown(Select):
-    def __init__(self):
+    def __init__(self) -> None:
         options = [
             SelectOption(
                 label=article.label,
@@ -35,7 +32,8 @@ class AlphaDropdown(Select):
 
     async def callback(self, interaction: Interaction):
         # Figure out the corresponding article to their selection
-        value = self.values[0]
+
+        value = self.values[0]  # Gets the select option that was clicked on
         if value == "Common Troubleshooting for users":
             menu = topics.initial.articles[0]
         elif value == "How to setup certain aspects of ModMail":
@@ -57,16 +55,18 @@ class AlphaDropdown(Select):
             "How do I use X command": topics.how_to_commands,
         }
 
+        # Figure out the sub-questions to display
         options_to_show = suboption_mapping.get(self.values[0])
 
         # Adds each sub question to the select menu options
-        next_options = [
+        next_options: list[SelectOption] = [
             SelectOption(
                 label=question.label,
             )
             for question in options_to_show.options
         ]
 
+        # Create a View object and generate the embed with the sub-questions
         view = View()
         view.add_item(BetaDropdown(options_to_show, next_options))
         embed = Embed(
@@ -79,7 +79,11 @@ class AlphaDropdown(Select):
 
 
 class BetaDropdown(Select):
-    def __init__(self, sub_option, options: list[SelectOption]):
+    def __init__(
+        self,
+        sub_option: trouleshooting | aspects | premium | how_to_commands,
+        options: list[SelectOption],
+    ):
         self.sub_option = sub_option
         super().__init__(
             placeholder="Select a question...",
@@ -91,17 +95,24 @@ class BetaDropdown(Select):
     async def callback(self, interaction: Interaction):
         embed = Embed(title=self.values[0])
         for question in self.sub_option.options:
+
+            # Figure out which sub question was chosen and get the content (answer) of the question
             if question.label == self.values[0]:
                 embed.description = question.content
 
                 if question.image:
                     embed.set_image(url=question.image)
 
-                view = discord.ui.View()
+                view = View()
                 if question.links:
                     url_buttons = []
-                    for key, value in question.links.items():
-                        url_buttons.append(Button(label=key, url=value))
+                    for (
+                        key,
+                        value,
+                    ) in question.links.items():  # Iterating through the dictionary
+                        url_buttons.append(
+                            Button(label=key, url=value)
+                        )  # Create button(s) that redirect to a link.
 
                     for button in url_buttons:
                         view.add_item(button)
