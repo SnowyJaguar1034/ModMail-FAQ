@@ -1,4 +1,5 @@
 from logging import getLogger
+from typing import Union
 
 import discord
 import topics
@@ -81,7 +82,7 @@ class AlphaDropdown(Select):
 class BetaDropdown(Select):
     def __init__(
         self,
-        sub_option: trouleshooting | aspects | premium | how_to_commands,
+        sub_option: Union[trouleshooting, aspects, premium, how_to_commands],
         options: list[SelectOption],
     ):
         self.sub_option = sub_option
