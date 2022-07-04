@@ -28,14 +28,14 @@ file = FileHandler(filename="faq.log", encoding="utf-8", mode="w")
 file.setFormatter(
     Formatter(
         """
-      Time: %(asctime)s: 
-      Level: %(levelname)s: 
-      Logger: %(name)s: 
-      Path: %(pathname)s: 
-      Line: %(lineno)d:
-      Function: %(funcName)s:
-      Message: %(message)s
-      """
+Time: %(asctime)s: 
+Level: %(levelname)s: 
+Logger: %(name)s: 
+Path: %(pathname)s: 
+Line: %(lineno)d:
+Function: %(funcName)s:
+Message: %(message)s
+"""
     )
 )
 logger.addHandler(file)

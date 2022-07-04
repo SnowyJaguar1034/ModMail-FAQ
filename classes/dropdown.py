@@ -1,7 +1,6 @@
 from logging import getLogger
 from typing import Union
 
-import discord
 import topics
 from discord import Embed, Interaction, SelectOption
 from discord.ui import Button, Select, View
@@ -17,6 +16,8 @@ class AlphaDropdown(Select):
             SelectOption(
                 label=article.label,
                 description=article.description,
+                emoji=article.emoji,
+                value=article.id,
             )
             for article in topics.initial.articles
         ]
@@ -34,30 +35,47 @@ class AlphaDropdown(Select):
     async def callback(self, interaction: Interaction):
         # Figure out the corresponding article to their selection
 
-        value = self.values[0]  # Gets the select option that was clicked on
-        if value == "Common Troubleshooting for users":
+        # Gets the select option that was clicked on
+        # if self.values[0] == "Common Troubleshooting for users":
+        #     menu = topics.initial.articles[0]
+        # elif self.values[0] == "How to setup certain aspects of ModMail":
+        #     menu = topics.initial.articles[1]
+        # elif self.values[0] == "ModMail Premium":
+        #     menu = topics.initial.articles[2]
+        # elif self.values[0] == "How do I use X command":
+        #     menu = topics.initial.articles[3]
+
+        if self.values[0].value == 1.0:
             menu = topics.initial.articles[0]
-        elif value == "How to setup certain aspects of ModMail":
+        elif self.values[0].value == 2.0:
             menu = topics.initial.articles[1]
-        elif value == "ModMail Premium":
+        elif self.values[0].value == 3.0:
             menu = topics.initial.articles[2]
-        elif value == "How do I use X command":
+        elif self.values[0].value == 4.0:
             menu = topics.initial.articles[3]
+        elif self.values[0].value == 5.0:
+            menu = topics.initial.articles[4]
 
         embed = Embed(
             title=menu.label, description=f"{menu.description}\n{menu.content}"
         )
 
         # Get the list of sub-questions to display, based on their selection
+        # suboption_mapping = {
+        #     "Common Troubleshooting for users": topics.trouleshooting,
+        #     "How to setup certain aspects of ModMail": topics.aspects,
+        #     "ModMail Premium": topics.premium,
+        #     "How do I use X command": topics.how_to_commands,
+        # }
         suboption_mapping = {
-            "Common Troubleshooting for users": topics.trouleshooting,
-            "How to setup certain aspects of ModMail": topics.aspects,
-            "ModMail Premium": topics.premium,
-            "How do I use X command": topics.how_to_commands,
+            1.0: topics.trouleshooting,
+            2.0: topics.aspects,
+            3.0: topics.premium,
+            4.0: topics.how_to_commands,
         }
 
         # Figure out the sub-questions to display
-        options_to_show = suboption_mapping.get(self.values[0])
+        options_to_show = suboption_mapping.get(self.values[0].value)
 
         # Adds each sub question to the select menu options
         next_options: list[SelectOption] = [
@@ -98,7 +116,7 @@ class BetaDropdown(Select):
         for question in self.sub_option.options:
 
             # Figure out which sub question was chosen and get the content (answer) of the question
-            if question.label == self.values[0]:
+            if question.id == self.values[0].value:
                 embed.description = question.content
 
                 if question.image:

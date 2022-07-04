@@ -1,12 +1,15 @@
 from dataclasses import dataclass
+from re import L
 
 
 @dataclass(kw_only=True)
 class Article:
     label: str
+    id: float
     content: str
     image: str = None
     links: dict[str, str] = None
+    emoji: str = None
 
 
 @dataclass
@@ -17,8 +20,11 @@ class SubOptions:
 @dataclass(kw_only=True)
 class Topic:
     label: str
+    id: int
     description: str
     content: str
+    emoji: str = None
+    Links: dict[str, str] = None
 
 
 @dataclass
@@ -30,24 +36,44 @@ initial = Category(
     [
         Topic(
             label="Common Troubleshooting for users",
+            id=1.0,
             description="Solutions for issues users need to fix from their end",
             content="Select an option from the dropdown to find help for a issue you are having.",
+            emoji=":2021_Snowsgiving_Emojis_001_Snow:",
         ),
         Topic(
             label="How to setup certain aspects of ModMail",
+            id=2.0,
             description="Setting the bot up, Using a different category, and more",
             content="Will include all / most setup commands + gifs on running each command (or just a simple screenshot)",
+            emoji="<:Discord_Certified_Moderator:892788741406605372>",
         ),
         Topic(
             label="ModMail Premium",
+            id=3.0,
             description="Topics related to Modmail premium",
             content=" Modmail premium is a service that allows users to purchase premium features on Modmail.",
+            emoji="<a:confuseddog:796261369136939038>",
         ),
         Topic(
             label="How do I use X command",
+            id=4.0,
             description="Examples on how to use each of the configuration commands",
             content="Select a option below to find out how to use a command.",
+            emoji="<a:pepeNoted:940729367250755624>",
         ),
+        # Topic(
+        #     label="Useful Links",
+        #     id=5.0,
+        #     content="Useful links for Modmail.",
+        #     links={
+        #         "Modmail Website": "https://modmail.xyz",
+        #         "Support Server (wjWJwJB)": "https://discord.gg/wjWJwJB",
+        #         "GitHub": "https://github.com/chamburr/modmail",
+        #         "ModMail Invite": "https://modmail.xyz/invite",
+        #     },
+        #     emoji=":link:",
+        # ),
     ]
 )
 
@@ -56,16 +82,20 @@ trouleshooting = SubOptions(
     [
         Article(
             label="It says that my message could not be delivered! What do I do?",
+            id=1.1,
             content='Check your Privacy Settings for the server you are trying to contact. Enable "allow direct messages for server members"',
             image="https://cdn.discordapp.com/attachments/972598239159283723/986749079218446377/Discord_8aN2padDIt.gif",
+            emoji="<a:pepeNoted:940729367250755624>",
         ),
         Article(
             label="ModMail told me to verify",
+            id=1.2,
             content="""Hi, if you can't verify try the following steps 1.Check you are logged in to the correct Discord account on your borwser. Click the link [here](<https://discord.com/login>) or the button below to check you are logged in correctly. 2. Try opening the verfication link in incognito mode, Yes this works on mobile. Copy paste the following link in your browser: <https://modmail.xyz/login?redirect=/authorized>""",
             links={
                 "Discord Login": "https://discord.com/login",
                 "ModMail Verification": "https://modmail.xyz/login?redirect=/authorized",
             },
+            emoji="<a:redsiren:853297746626609174>",
         ),
     ]
 )
@@ -75,6 +105,7 @@ aspects = SubOptions(
     [
         Article(
             label=" Should I give Modmail administrator?",
+            id=2.1,
             content="""
                     Providing the administrator role to Modmail would migitate any issues when it comes to permissions, however we do not encourage anyone to provide the administrator permission 
                     to ANY bots in your server (unless you have FULL control over the code and how the bot functions). 
@@ -84,6 +115,7 @@ aspects = SubOptions(
         ),
         Article(
             label="Modmail isn't showing anonymous replies to the user",
+            id=2.2,
             content="""
                     First off, make sure whether or not you have anonymous replies enabled. 
                     Run `=viewconfig`, and then check whether it says `Enabled` or `Disabled` under "Anonymous Messaging". 
@@ -95,6 +127,7 @@ aspects = SubOptions(
         ),
         Article(
             label="The bot says that a category is not found, what should I do?",
+            id=2.3,
             content="""
                     If you are a server admin; this is telling you that the bot is not set up properly. If you have previously used `=setup`, you might have deleted the category. 
                     Either use `=category [name]` to create the category or `=setup` to set up everything again.
@@ -105,14 +138,18 @@ aspects = SubOptions(
         ),
         Article(
             label=" Why is the custom emote I sent not working?",
+            id=2.4,
             content="Due to Discord requirements; the bot needs to be in the server where the emote is from in order to use it. Otherwise, the emote will show up as `:emote_name:` instead of the actual emote.",
+            emoji="<a:community_points:857633011830226944>",
         ),
         Article(
             label=" Why is the ModMail log not working?",
+            id=2.5,
             content="This is most likely due to a lack of permission. If it still does not work with full permissions, you can try deleting the channel and run `=logging` to enable it again.",
         ),
         Article(
             label="Why isn't the bot responding to my commands?",
+            id=2.6,
             content="""
                     Please check the following before asking for help:
                     • The bot has Read Messages, Send Messages, and Embed Links permissions.
@@ -123,8 +160,9 @@ aspects = SubOptions(
         ),
         Article(
             label="What permissions does ModMail need?",
+            id=2.7,
             content="""
-                  ModMail needs the following permissions:
+                ModMail needs the following permissions:
                 - `Manage Channels`
                 - `Manage Messages`
                 - `Manage Roles`
@@ -146,11 +184,13 @@ premium = SubOptions(
     [
         Article(
             label="Where can I buy premium?",
+            id=3.1,
             content="You can buy premium on Modmails website on the [premium page](https://modmail.xyz/premium).",
             links={"Buy Premium": "https://modmail.xyz/premium"},
         ),
         Article(
             label="What are the perks of Modmail Premium?",
+            id=3.2,
             content="""
                     Depending on the tier of premium purchased users will get access to premium features on 1 server (<@&576756461267451934>), 3 servers (<@&576754574346551306>) and 5 servers (<@&576754671620980740>).
                     Users can manage their premium with the following commands:
@@ -166,13 +206,16 @@ premium = SubOptions(
                     - `=snippet <snippet name>` / `=a <snippet name>`
                     - `=asnippet <snippet name>` / `=as <snippet name>`
                     """,
+            emoji="<:full_star:983027888544702464>",
         ),
         Article(
             label="What payment methods are supported?",
+            id=3.3,
             content="ModMail currently only supports PayPal.",
         ),
         Article(
             label=" Issues with premium",
+            id=3.4,
             content="""
             Any user who bought premium will have one of the following roles depending on the tier purchased: <@&576756461267451934>, <@&576754574346551306> and <@&576754671620980740>.
             This enables them to use the premium management commands to assign/remove premium from servers as well as check which servers they have premium on.
@@ -185,6 +228,7 @@ premium = SubOptions(
         ),
         Article(
             label="How many servers can I use premium on?",
+            id=3.5,
             content="""
                     That depends on the tier of modmail you purchased.
                     Basic: 1 server
@@ -194,6 +238,7 @@ premium = SubOptions(
         ),
         Article(
             label="Can I have a personalized version of Modmail?",
+            id=3.6,
             content="""
                     You can contact <@381998065327931392> (`James [a_leon]#6196`) for a custom instance. The pricing is at $10/month or $60/year.
                     These are the benefits of a custom instance:
@@ -205,16 +250,6 @@ premium = SubOptions(
                     - Optional: Custom commands by SnowyJaguar#1034, within reason.
                     """,
         ),
-        Article(
-            label="Useful Links",
-            content="Useful links for Modmail.",
-            links={
-                "Modmail Website": "https://modmail.xyz",
-                "Support Server (wjWJwJB)": "https://discord.gg/wjWJwJB",
-                "GitHub": "https://github.com/chamburr/modmail",
-                "ModMail Invite": "https://modmail.xyz/invite",
-            },
-        ),
     ]
 )
 
@@ -223,6 +258,7 @@ how_to_commands = SubOptions(
     [
         Article(
             label="How do I view my server configuration?",
+            id=4.1,
             content="""
                     To view the server configuration, use the `=viewconfig` command. This will show you the current:
                     - Prefix
@@ -239,15 +275,18 @@ how_to_commands = SubOptions(
         ),
         Article(
             label="Is there a video that shows me how to use Modmail?",
+            id=4.2,
             content="Yes! Click the button below to watch the video.",
         ),
         Article(
             label="How do I setup ModMail?",
+            id=4.3,
             content="To setup modmail all you need to use is the `=setup` command. This will create a new category at the bottom of you channel list called `ModMail` and will create a new channel in that category called `modmail-log` where the bot will log tickets being opned and closed.",
             image="https://cdn.discordapp.com/attachments/972598239159283723/986610442094936134/Discord_rJLF2pmZKQ.gif",
         ),
         Article(
             label="How do I view/change the prefix for my server.",
+            id=4.4,
             content="""
                     To change the prefix for your server use the `=prefix <new prefix>` command. 
                     This will change the prefix for your server e.g. `=prefix !`.
@@ -258,32 +297,39 @@ how_to_commands = SubOptions(
         ),
         Article(
             label="How do I ping people when a ticket is opened?",
+            id=4.5,
             content='To inform people when new tickets are opened they need to have a ping role. You can set these with the `=pingrole <role mention|role id|role name>` command. You can set up to 10 different ping roles. If a role you are adding by name has a space in the name then you need to wrap the name in `" "` e.g. `=pingrole "Staff Team"`.',
             image="https://cdn.discordapp.com/attachments/972598239159283723/986615308297043968/Discord_LRlwXEUNOB.gif",
         ),
         Article(
             label="How do I manage my logging channel?",
+            id=4.6,
             content="Via the =logging command, you can recreate, change and disable the logging channel. If your logging channel was deleted, run =logging to disable it and then re-enable it, which should re-create the channel. If you want to use an existing channel, disable logging by running =logging once. Then run =logging #channel_name to re-enable logging and to send logs to an already existing channel of your choice.",
             image="https://cdn.discordapp.com/attachments/972598239159283723/986616380528930816/Discord_f4oLWVFsgz.gif",
         ),
         Article(
             label="How do I force my staff to reply via commands?",
+            id=4.7,
             content="Enable command only mode. You can do so by running `=commandonly`. Once in command only mode, staff members can only send a reply to the users by using the `=reply <message>` command. If they want to reply anonymously, they will need to use `=areply <message>`.",
             image='"https://cdn.discordapp.com/attachments/972598239159283723/986617473040257045/Discord_i7mDyLIgjD.png"',
         ),
         Article(
             label="How do I re-create my ModMail category?",
+            id=4.8,
             content="To re-create your ModMail category, you can use the `=category [optional name of category]` command. This will delete your current ModMail category and create a new one.",
             image="https://cdn.discordapp.com/attachments/972598239159283723/986613581900554281/Discord_LwB01WaT1c.gif",
         ),
         Article(
             label="How do I make my staff anonymous?",
+            id=4.9,
             content="To make your staff members appear as anonymous, you can use the `=anonymous` toggle command. Note that this will only work on messages sent normally without the use of commands. If you want an anonymous reply via commands, use `=areply`. As for making a member's messages anonymous,  there's no way to do that as this would be too exploitable.",
         ),
         Article(
             label="How do I let people reply to tickets?",
+            id=4.10,
             content='To allow people to respond to tickets they need to have a access role. You can set these with the `=accessrole <role mention|role id|role name>` command. You can set up to 10 different access roles. If a role you are adding by name has a space in the name then you need to wrap the name in `" "` e.g. `=accessrole "Staff Team"`.',
             image="https://cdn.discordapp.com/attachments/972598239159283723/986614689725288459/Discord_Pa6RN5xMTH.gif",
+            emoji="🔒",
         ),
     ]
 )
