@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from re import L
 
 from discord import Colour, PartialEmoji
 
@@ -37,6 +38,43 @@ class Category:
     articles: list[Topic]
 
 
+@dataclass(kw_only=True)
+class Links:
+    label: str
+    url: str
+    emoji: PartialEmoji.from_str = None
+
+
+links = [
+    Links(
+        label="GitHub",
+        url="https://github.com/chamburr/modmail",
+        emoji="<:GitHub_Logo:993990129867825162>",
+    ),
+    Links(
+        label="Support Server (wjWJwJB)",
+        url="https://discord.gg/",
+        emoji="<:discord_logo:993990369555521566>",
+    ),
+    Links(
+        label="ModMail Website",
+        url="https://modmail.xyz/",
+        emoji="<:modamil_logo:993989822173696050>",
+    ),
+    Links(
+        label="ModMail Invite",
+        url="https://modmail.xyz/invite",
+        emoji="<:invite:993989507110146140>",
+    ),
+]
+# {
+#     "Modmail Website": "https://modmail.xyz",
+#     "Support Server (wjWJwJB)": "https://discord.gg/wjWJwJB",
+#     "GitHub": "https://github.com/chamburr/modmail",
+#     "ModMail Invite": "https://modmail.xyz/invite",
+# },
+
+
 initial = Category(
     [
         Topic(
@@ -68,18 +106,6 @@ initial = Category(
             content="Select a option below to find out how to use a command.",
             emoji="<a:pepeNoted:940729367250755624>",
         ),
-        # Topic(
-        #     label="Useful Links",
-        #     id=5.0,
-        #     content="Useful links for Modmail.",
-        #     links={
-        #         "Modmail Website": "https://modmail.xyz",
-        #         "Support Server (wjWJwJB)": "https://discord.gg/wjWJwJB",
-        #         "GitHub": "https://github.com/chamburr/modmail",
-        #         "ModMail Invite": "https://modmail.xyz/invite",
-        #     },
-        #     emoji=":link:",
-        # ),
     ]
 )
 

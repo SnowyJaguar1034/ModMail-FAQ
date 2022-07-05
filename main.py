@@ -2,12 +2,21 @@ from asyncio import run
 from logging import INFO, FileHandler, Formatter, StreamHandler, basicConfig, getLogger
 from typing import Optional
 
-from discord import Activity, ActivityType, Embed, Intents, Interaction, app_commands
+from discord import (
+    Activity,
+    ActivityType,
+    Colour,
+    Embed,
+    Intents,
+    Interaction,
+    app_commands,
+)
 from discord.ext import commands
-from discord.ui import View
+from discord.ui import Button, View
 
 from classes.dropdown import AlphaDropdown
 from classes.faq import FAQ_Client
+from classes.topics import links
 
 intents = Intents.default()
 intents.message_content = True
@@ -50,27 +59,37 @@ log = getLogger(__name__)
 data_loaded = None
 
 
-@client.tree.command(name="faq", description="Get support for ModMail")
-async def faq(interaction: Interaction):
+async def generate_dropdown(
+    interaction: Interaction,
+    ephemeral: Optional[bool] = False,
+    persistant: Optional[bool] = False,
+):
     view = View()
+    if persistant is True:
+        view.custom_id = "persistant_dropdown"
+    for link in links:
+        button = Button(label=link.label, emoji=link.emoji, url=link.url)
+        view.add_item(button)
     view.add_item(AlphaDropdown())
     embed = Embed(
         title="Welcome to the ModMail Help Center!",
         description='This is an **interactive FAQ** where you can find answers to common questions about ModMail. Use the Select Menu below to navigate through the FAQ. You can go back to the previous topic by clicking the "Back" button',
+        colour=Colour.from_str(client.config.default_colour),
     )
-    await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
+    await interaction.response.send_message(embed=embed, view=view, ephemeral=ephemeral)
+
+
+@client.tree.command(name="faq", description="Get support for ModMail")
+async def faq(interaction: Interaction):
+    await generate_dropdown(interaction=interaction)
 
 
 @client.tree.command(name="post", description="Post the standalone help menu")
 @app_commands.describe(ephemeral="Accepts 'True' or 'False")
 async def post(interaction: Interaction, ephemeral: Optional[bool] = False):
-    view = View()
-    view.add_item(AlphaDropdown())
-    embed = Embed(
-        title="Welcome to the ModMail Help Center!",
-        description='This is an **interactive FAQ** where you can find answers to common questions about ModMail. Use the Select Menu below to navigate through the FAQ. You can go back to the previous topic by clicking the "Back" button',
+    await generate_dropdown(
+        interaction=interaction, ephemeral=ephemeral, persistant=True
     )
-    await interaction.response.send_message(embed=embed, view=view, ephemeral=ephemeral)
 
 
 @client.tree.command(

@@ -1,7 +1,7 @@
 from logging import getLogger
 from typing import Union
 
-from discord import Embed, Interaction, PartialEmoji, SelectOption
+from discord import Embed, Interaction, SelectOption
 from discord.ui import Button, Select, View
 
 from classes import topics
@@ -31,6 +31,7 @@ class AlphaDropdown(Select):
             min_values=1,
             max_values=1,
             options=options,
+            custom_id="alpha_dropdown",
         )
 
     async def callback(self, interaction: Interaction):
@@ -45,7 +46,6 @@ class AlphaDropdown(Select):
         #     menu = topics.initial.articles[2]
         # elif self.values[0] == "How do I use X command":
         #     menu = topics.initial.articles[3]
-        # log.critical(f"Selection: {self.values[0]} (Type: {type(self.values[0])})")
         if float(self.values[0]) == 1.0:
             menu = initial.articles[0]
         elif float(self.values[0]) == 2.0:
@@ -91,9 +91,6 @@ class AlphaDropdown(Select):
         # Create a View object and generate the embed with the sub-questions
         view = View()
         view.add_item(BetaDropdown(options_to_show, next_options))
-        log.critical(f"Selection: {self.values} (Type: {type(self.values[0])})")
-        for entry in self.values:
-            log.critical(f"Selection: {entry} (Type: {type(entry)})")
         embed = Embed(
             title=self.values[0],
             description="\n\n".join(
