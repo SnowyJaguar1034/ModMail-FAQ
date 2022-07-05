@@ -14,7 +14,7 @@ from discord import (
 from discord.ext import commands
 from discord.ui import Button, View
 
-from classes.dropdown import AlphaDropdown
+from classes.dropdown import AlphaDropdown, PersistentDropdown
 from classes.faq import FAQ_Client
 from classes.topics import links
 
@@ -65,12 +65,14 @@ async def generate_dropdown(
     persistant: Optional[bool] = False,
 ):
     view = View()
-    if persistant is True:
-        view.custom_id = "persistant_dropdown"
+
     for link in links:
         button = Button(label=link.label, emoji=link.emoji, url=link.url)
         view.add_item(button)
-    view.add_item(AlphaDropdown())
+    if persistant is not True:
+        view.add_item(AlphaDropdown())
+    elif persistant is True:
+        view.add_item(PersistentDropdown())
     embed = Embed(
         title="Welcome to the ModMail Help Center!",
         description='This is an **interactive FAQ** where you can find answers to common questions about ModMail. Use the Select Menu below to navigate through the FAQ. You can go back to the previous topic by clicking the "Back" button',
