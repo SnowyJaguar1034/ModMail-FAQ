@@ -47,6 +47,8 @@ You should make a copy of `example.env` and rename it to `.env`.
 - `GUILD` : The ID of the guild that the bot is in.
 - `DESCRIPTION` : The description of your bot
 - `ACTIVITY` : The activity message shown on the bot's status
+- `Owners` : The IDs of the bot owners, each ID separated by a comma.
+- `Default_COLOUR` : The default colour of the embeds.
 
 ### Setting up a virtual environment
 This is useful if you want to run a variety of python projects on a machine but not have version conflicts. I highly recommend doing this even if you only have one project, I didn't understand the appeal when I started using python but after a while I started seeeing the benefits.

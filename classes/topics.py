@@ -1,5 +1,8 @@
 from dataclasses import dataclass
-from re import L
+
+from discord import Colour, PartialEmoji
+
+from .config import Config
 
 
 @dataclass(kw_only=True)
@@ -9,7 +12,8 @@ class Article:
     content: str
     image: str = None
     links: dict[str, str] = None
-    emoji: str = None
+    emoji: PartialEmoji.from_str = None
+    colour: Colour.from_str = Config().defualt_colour or 0x1E90FF
 
 
 @dataclass
@@ -23,7 +27,8 @@ class Topic:
     id: float
     description: str
     content: str
-    emoji: str = None
+    emoji: PartialEmoji.from_str = None
+    colour: Colour.from_str = None
     links: dict[str, str] = None
 
 
@@ -40,6 +45,7 @@ initial = Category(
             description="Solutions for issues users need to fix from their end",
             content="Select an option from the dropdown to find help for a issue you are having.",
             emoji="📝",
+            colour=0x1E90FF,
         ),
         Topic(
             label="How to setup certain aspects of ModMail",

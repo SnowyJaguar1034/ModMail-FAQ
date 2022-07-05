@@ -1,10 +1,11 @@
 from logging import getLogger
 from typing import Union
 
-import topics
 from discord import Embed, Interaction, PartialEmoji, SelectOption
 from discord.ui import Button, Select, View
-from topics import aspects, how_to_commands, premium, trouleshooting
+
+from classes import topics
+from classes.topics import aspects, how_to_commands, initial, premium, trouleshooting
 
 log = getLogger(__name__)
 
@@ -16,7 +17,7 @@ class AlphaDropdown(Select):
             SelectOption(
                 label=article.label,
                 description=article.description,
-                emoji=PartialEmoji.from_str(article.emoji) if article.emoji else None,
+                emoji=article.emoji,  # PartialEmoji.from_str() if article.emoji else None,
                 value=str(article.id),
             )
             for article in topics.initial.articles
@@ -46,18 +47,20 @@ class AlphaDropdown(Select):
         #     menu = topics.initial.articles[3]
         # log.critical(f"Selection: {self.values[0]} (Type: {type(self.values[0])})")
         if float(self.values[0]) == 1.0:
-            menu = topics.initial.articles[0]
+            menu = initial.articles[0]
         elif float(self.values[0]) == 2.0:
-            menu = topics.initial.articles[1]
+            menu = initial.articles[1]
         elif float(self.values[0]) == 3.0:
-            menu = topics.initial.articles[2]
+            menu = initial.articles[2]
         elif float(self.values[0]) == 4.0:
-            menu = topics.initial.articles[3]
+            menu = initial.articles[3]
         elif float(self.values[0]) == 5.0:
-            menu = topics.initial.articles[4]
+            menu = initial.articles[4]
 
         embed = Embed(
-            title=menu.label, description=f"{menu.description}\n{menu.content}"
+            title=menu.label,
+            description=f"{menu.description}\n{menu.content}",
+            colour=menu.colour,
         )
 
         # Get the list of sub-questions to display, based on their selection
@@ -68,10 +71,10 @@ class AlphaDropdown(Select):
         #     "How do I use X command": topics.how_to_commands,
         # }
         suboption_mapping = {
-            1.0: topics.trouleshooting,
-            2.0: topics.aspects,
-            3.0: topics.premium,
-            4.0: topics.how_to_commands,
+            1.0: trouleshooting,
+            2.0: aspects,
+            3.0: premium,
+            4.0: how_to_commands,
         }
 
         # Figure out the sub-questions to display
@@ -121,6 +124,7 @@ class BetaDropdown(Select):
             # Figure out which sub question was chosen and get the content (answer) of the question
             if question.label == self.values[0]:  # .value
                 embed.description = question.content
+                embed.colour = question.colour
 
                 if question.image:
                     embed.set_image(url=question.image)
