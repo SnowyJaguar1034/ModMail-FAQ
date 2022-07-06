@@ -61,18 +61,23 @@ data_loaded = None
 
 async def generate_dropdown(
     interaction: Interaction,
-    ephemeral: Optional[bool] = False,
-    persistant: Optional[bool] = False,
+    ephemeral: bool = False,
+    persistant: bool = False,
 ):
-    view = View()
+
+    if persistant is not True:
+        view = View()
+        view.add_item(AlphaDropdown())
+
+    elif persistant is True:
+        view = View(timeout=None)
+        view.add_item(PersistentDropdown())
 
     for link in links:
         button = Button(label=link.label, emoji=link.emoji, url=link.url)
         view.add_item(button)
-    if persistant is not True:
-        view.add_item(AlphaDropdown())
-    elif persistant is True:
-        view.add_item(PersistentDropdown())
+
+
     embed = Embed(
         title="Welcome to the ModMail Help Center!",
         description='This is an **interactive FAQ** where you can find answers to common questions about ModMail. Use the Select Menu below to navigate through the FAQ. You can go back to the previous topic by clicking the "Back" button',
