@@ -1,6 +1,7 @@
 # Custom
 *.log
 dump.py
+sorter.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
