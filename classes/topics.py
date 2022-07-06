@@ -29,7 +29,7 @@ class Topic:
     description: str
     content: str
     emoji: PartialEmoji.from_str = None
-    colour: Colour.from_str = None
+    colour: Colour = None
     links: dict[str, str] = None
 
 

@@ -15,7 +15,8 @@ log = getLogger(__name__)
 
 # Defines a custom Select containing colour options that the user can choose. The callback function of this class is called when the user changes their choice
 class AlphaDropdown(Select):
-    def __init__(self) -> None:
+    def __init__(self, custom_id : str = 'base_alphadropdown') -> None:
+        self.custom_id = custom_id
         options = [
             SelectOption(
                 label=article.label,
@@ -34,21 +35,13 @@ class AlphaDropdown(Select):
             min_values=1,
             max_values=1,
             options=options,
-            custom_id=None,
+            custom_id = self.custom_id,
         )
 
     async def callback(self, interaction: Interaction):
         # Figure out the corresponding article to their selection
 
         # Gets the select option that was clicked on
-        # if self.values[0] == "Common Troubleshooting for users":
-        #     menu = topics.initial.articles[0]
-        # elif self.values[0] == "How to setup certain aspects of ModMail":
-        #     menu = topics.initial.articles[1]
-        # elif self.values[0] == "ModMail Premium":self.values[0]
-        #     menu = topics.initial.articles[2]
-        # elif self.values[0] == "How do I use X command":
-        #     menu = topics.initial.articles[3]
         if float(self.values[0]) == 1.0:
             menu = initial.articles[0]
         elif float(self.values[0]) == 2.0:
@@ -67,12 +60,7 @@ class AlphaDropdown(Select):
         )
 
         # Get the list of sub-questions to display, based on their selection
-        # suboption_mapping = {
-        #     "Common Troubleshooting for users": topics.trouleshooting,
-        #     "How to setup certain aspects of ModMail": topics.aspects,
-        #     "ModMail Premium": topics.premium,
-        #     "How do I use X command": topics.how_to_commands,
-        # }
+
         suboption_mapping = {
             1.0: trouleshooting,
             2.0: aspects,
@@ -106,7 +94,7 @@ class AlphaDropdown(Select):
 class BetaDropdown(Select):
     def __init__(
         self,
-        sub_option,  # Union[trouleshooting, aspects, premium, how_to_commands],
+        sub_option, 
         options: list[SelectOption],
     ):
         self.sub_option = sub_option
@@ -150,5 +138,3 @@ class PersistentDropdown(AlphaDropdown):
     def __init__(self):
         super().__init__(custom_id="persistent_dropdown")
 
-    async def callback(self, interaction: Interaction):
-        await interaction.response.send_message(embed=self.embed, view=self.view)
