@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from re import L
 
 from discord import Colour, PartialEmoji
 
@@ -14,7 +13,7 @@ class Article:
     image: str = None
     links: dict[str, str] = None
     emoji: PartialEmoji.from_str = None
-    colour: Colour.from_str = Config().defualt_colour or 0x1E90FF
+    colour: Colour = 0x1E90FF
 
 
 @dataclass
@@ -50,11 +49,6 @@ links = [
         label="GitHub",
         url="https://github.com/chamburr/modmail",
         emoji="<:GitHub_Logo:993990129867825162>",
-    ),
-    Links(
-        label="Support Server (wjWJwJB)",
-        url="https://discord.gg/",
-        emoji="<:discord_logo:993990369555521566>",
     ),
     Links(
         label="ModMail Website",

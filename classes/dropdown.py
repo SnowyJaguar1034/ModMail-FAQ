@@ -1,7 +1,4 @@
-from distutils.sysconfig import customize_compiler
 from logging import getLogger
-from re import A
-from tkinter import N
 from typing import Union
 
 from discord import Embed, Interaction, SelectOption
@@ -34,7 +31,7 @@ class AlphaDropdown(Select):
             min_values=1,
             max_values=1,
             options=options,
-            custom_id = self.custom_id,
+            custom_id=self.custom_id,
         )
 
     async def callback(self, interaction: Interaction):
@@ -93,7 +90,7 @@ class AlphaDropdown(Select):
 class BetaDropdown(Select):
     def __init__(
         self,
-        sub_option, 
+        sub_option,
         options: list[SelectOption],
     ):
         self.sub_option = sub_option
@@ -136,4 +133,3 @@ class BetaDropdown(Select):
 class PersistentDropdown(AlphaDropdown):
     def __init__(self):
         super().__init__(custom_id="persistent_dropdown")
-
