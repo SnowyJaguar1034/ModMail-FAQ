@@ -64,7 +64,6 @@ data_loaded = None
 async def generate_dropdown(
     persistant: bool = False,
 ):
-
     view = View()
     if persistant is not True:
         view.add_item(AlphaDropdown())
@@ -74,8 +73,7 @@ async def generate_dropdown(
         view.add_item(PersistentDropdown())
 
     for link in links:
-        button = Button(label=link.label, emoji=link.emoji, url=link.url)
-        view.add_item(button)
+        view.add_item(Button(label=link.label, emoji=link.emoji, url=link.url))
 
     embed = Embed(
         title="Welcome to the ModMail Help Center!",
