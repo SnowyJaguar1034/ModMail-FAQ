@@ -115,17 +115,15 @@ class BetaDropdown(Select):
 
                 view = View()
                 if question.links:
-                    url_buttons = []
-                    for (
-                        key,
-                        value,
-                    ) in question.links.items():  # Iterating through the dictionary
-                        url_buttons.append(
-                            Button(label=key, url=value)
-                        )  # Create button(s) that redirect to a link.
-
-                    for button in url_buttons:
-                        view.add_item(button)
+                    for link in question.links:
+                        view.add_item(Button(link.label, link.url))
+                    # for (
+                    #     key,
+                    #     value,
+                    # ) in question.links.items():  # Iterating through the dictionary
+                    #     view.add_item(
+                    #         Button(label=key, url=value)
+                    #     )  # Create button(s) that redirect to a link.
 
         await interaction.response.send_message(embed=embed, ephemeral=True, view=view)
 

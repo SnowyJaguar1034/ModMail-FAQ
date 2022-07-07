@@ -1,3 +1,5 @@
+from re import L
+
 from .structure import Article, Category, Links, SubOptions, Topic
 
 links = [
@@ -67,10 +69,17 @@ trouleshooting = SubOptions(
             label="ModMail told me to verify",
             id=1.2,
             content="""Hi, if you can't verify try the following steps 1.Check you are logged in to the correct Discord account on your borwser. Click the link [here](<https://discord.com/login>) or the button below to check you are logged in correctly. 2. Try opening the verfication link in incognito mode, Yes this works on mobile. Copy paste the following link in your browser: <https://modmail.xyz/login?redirect=/authorized>""",
-            links={
-                "Discord Login": "https://discord.com/login",
-                "ModMail Verification": "https://modmail.xyz/login?redirect=/authorized",
-            },
+            # links={
+            #     "Discord Login": "https://discord.com/login",
+            #     "ModMail Verification": "https://modmail.xyz/login?redirect=/authorized",
+            # },
+            links=[
+                Links(label="Discord Login", url="https://discord.com/login"),
+                Links(
+                    label="ModMail Verification",
+                    url="https://modmail.xyz/login?redirect=/authorized",
+                ),
+            ],
             emoji="<a:redsiren:853297746626609174>",
         ),
     ]
@@ -200,7 +209,10 @@ premium = SubOptions(
             *Note: We can manually assign patron roles to those who do not join before purchase however the user will need to provide proof of payment via a ModMail ticket and the process could take a few hours while we wait for an administrator to be available.*
             """,
             image="https://media.discordapp.net/attachments/576765224460353589/929004300951253012/unknown.png",
-            links={"Premium": "https://modmail.xyz/premiumslist"},
+            # links={"Premium": "https://modmail.xyz/premium"},
+            links=[
+                Links(label="Premium", url="https://modmail.xyz/premium"),
+            ],
         ),
         Article(
             label="How many servers can I use premium on?",
