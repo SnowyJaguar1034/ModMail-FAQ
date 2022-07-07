@@ -1,5 +1,7 @@
 from asyncio import run
 from logging import INFO, FileHandler, Formatter, StreamHandler, basicConfig, getLogger
+from pydoc import cli
+from re import M, T
 from typing import Optional
 
 from discord import (
@@ -60,43 +62,51 @@ data_loaded = None
 
 
 async def generate_dropdown(
-    interaction: Interaction,
-    ephemeral: bool = False,
     persistant: bool = False,
 ):
 
+    view = View()
     if persistant is not True:
-        view = View()
         view.add_item(AlphaDropdown())
 
     elif persistant is True:
-        view = View(timeout=None)
+        view.timeout = None
         view.add_item(PersistentDropdown())
 
     for link in links:
         button = Button(label=link.label, emoji=link.emoji, url=link.url)
         view.add_item(button)
 
-
     embed = Embed(
         title="Welcome to the ModMail Help Center!",
         description='This is an **interactive FAQ** where you can find answers to common questions about ModMail. Use the Select Menu below to navigate through the FAQ. You can go back to the previous topic by clicking the "Back" button',
         colour=Colour.from_str(client.config.default_colour),
     )
-    await interaction.response.send_message(embed=embed, view=view, ephemeral=ephemeral)
+    return view, embed
 
 
 @client.tree.command(name="faq", description="Get support for ModMail")
 async def faq(interaction: Interaction):
-    await generate_dropdown(interaction=interaction)
+    view, embed = await generate_dropdown()
+    await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
 
 @client.tree.command(name="post", description="Post the standalone help menu")
 @app_commands.describe(ephemeral="Accepts 'True' or 'False")
 async def post(interaction: Interaction, ephemeral: Optional[bool] = False):
-    await generate_dropdown(
-        interaction=interaction, ephemeral=ephemeral, persistant=True
-    )
+    view, embed = await generate_dropdown(persistant=True)
+    if client.config.static_faq is not None:
+        await interaction.response.send_message(
+            embed=embed, view=view, ephemeral=ephemeral
+        )
+    elif client.config.static_faq is None:
+        await interaction.response.send_message(
+            embed=embed, view=view, ephemeral=ephemeral
+        )
+        static = await interaction.original_message()
+        log.critical(
+            f"The ID of your persistantdropdown is '{static.id}'. Save this to the 'STATIC_FAQ' variable in the '.env' file"
+        )
 
 
 @client.tree.command(

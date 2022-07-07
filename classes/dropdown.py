@@ -12,7 +12,7 @@ log = getLogger(__name__)
 
 # Defines a custom Select containing colour options that the user can choose. The callback function of this class is called when the user changes their choice
 class AlphaDropdown(Select):
-    def __init__(self, custom_id : str = 'base_alphadropdown') -> None:
+    def __init__(self, custom_id: str = "base_alphadropdown") -> None:
         options = [
             SelectOption(
                 label=article.label,
@@ -31,7 +31,7 @@ class AlphaDropdown(Select):
             min_values=1,
             max_values=1,
             options=options,
-            custom_id=self.custom_id,
+            custom_id=custom_id,
         )
 
     async def callback(self, interaction: Interaction):
