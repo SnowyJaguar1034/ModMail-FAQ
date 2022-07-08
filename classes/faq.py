@@ -4,10 +4,11 @@ from logging import getLogger
 from aiohttp import ClientSession
 from attr import s
 from discord import Client, Object, app_commands
-from discord.ui import View
+from discord.ui import Button, View
 
 from classes.config import Config
-from classes.dropdown import PersistentDropdown
+from classes.dropdown import PersistentView  # ,PersistentDropdown
+from classes.topics import links
 
 log = getLogger(__name__)
 
@@ -30,15 +31,14 @@ class FAQ_Client(Client):
         log.info(f"Client user; {self.user} ({self.user.id})")
         log.info(f"Client version; {self.version}")
         log.info(f"Client Start Time; {self.start_time}")
-        view = View(
-            timeout=None,
-        )
-        view.add_item(PersistentDropdown())
+        # view = View(
+        #     timeout=None,
+        # )
+        # view.add_item(PersistentDropdown())
+        # for link in links:
+        #     view.add_item(Button(label=link.label, emoji=link.emoji, url=link.url))
         self.add_view(
-            view,
-            message_id=self.config.static_faq
-            if self.config.static_faq is not None
-            else None,
+            PersistentView(),
         )
         self.tree.copy_global_to(guild=self.modmail_support)
         await self.tree.sync(guild=self.modmail_support)

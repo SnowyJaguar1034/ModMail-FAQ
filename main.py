@@ -1,7 +1,9 @@
 from asyncio import run
+from ctypes import Union
 from logging import INFO, FileHandler, Formatter, StreamHandler, basicConfig, getLogger
 from pydoc import cli
 from re import M, T
+from tkinter import E
 from typing import Optional
 
 from discord import (
@@ -16,7 +18,7 @@ from discord import (
 from discord.ext import commands
 from discord.ui import Button, View
 
-from classes.dropdown import AlphaDropdown, PersistentDropdown
+from classes.dropdown import AlphaDropdown, PersistentView  # ,PersistentDropdown
 from classes.faq import FAQ_Client
 from classes.topics import links
 
@@ -64,13 +66,14 @@ data_loaded = None
 async def generate_dropdown(
     persistant: bool = False,
 ):
-    view = View()
     if persistant is not True:
+        view = View()
         view.add_item(AlphaDropdown())
 
     elif persistant is True:
-        view.timeout = None
-        view.add_item(PersistentDropdown())
+        view = PersistentView()
+        # view.timeout = None
+        # view.add_item(PersistentDropdown())
 
     for link in links:
         view.add_item(Button(label=link.label, emoji=link.emoji, url=link.url))

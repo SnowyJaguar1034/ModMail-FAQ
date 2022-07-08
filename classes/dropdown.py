@@ -1,11 +1,21 @@
+from calendar import c
 from logging import getLogger
+from re import L
 from typing import Union
 
+from attr import s
 from discord import Embed, Interaction, SelectOption
 from discord.ui import Button, Select, View
 
 from classes import topics
-from classes.topics import aspects, how_to_commands, initial, premium, trouleshooting
+from classes.topics import (
+    aspects,
+    how_to_commands,
+    initial,
+    links,
+    premium,
+    trouleshooting,
+)
 
 log = getLogger(__name__)
 
@@ -116,7 +126,7 @@ class BetaDropdown(Select):
                 view = View()
                 if question.links:
                     for link in question.links:
-                        view.add_item(Button(link.label, link.url))
+                        view.add_item(Button(label=link.label, url=link.url))
                     # for (
                     #     key,
                     #     value,
@@ -128,6 +138,16 @@ class BetaDropdown(Select):
         await interaction.response.send_message(embed=embed, ephemeral=True, view=view)
 
 
-class PersistentDropdown(AlphaDropdown):
+# class PersistentDropdown(AlphaDropdown):
+#     def __init__(self):
+#         super().__init__(custom_id="persistent_dropdown")
+
+
+class PersistentView(View):
     def __init__(self):
-        super().__init__(custom_id="persistent_dropdown")
+        super().__init__(timeout=None)
+        # Add the base dropdown to the view
+        self.add_item(AlphaDropdown(custom_id="persistent_dropdown"))
+        # Loop through the links and add them to the view
+        for link in links:
+            self.add_item(Button(label=link.label, url=link.url))

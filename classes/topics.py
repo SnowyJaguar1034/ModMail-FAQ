@@ -171,7 +171,8 @@ premium = SubOptions(
             label="Where can I buy premium?",
             id=3.1,
             content="You can buy premium on Modmails website on the [premium page](https://modmail.xyz/premium).",
-            links={"Buy Premium": "https://modmail.xyz/premium"},
+            # links={"Buy Premium": "https://modmail.xyz/premium"},
+            links=[Links(label="Buy Premium", url="https://modmail.xyz/premium")],
         ),
         Article(
             label="What are the perks of Modmail Premium?",
