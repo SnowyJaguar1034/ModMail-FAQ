@@ -1,6 +1,4 @@
-from re import L
-
-from .structure import Article, Category, Links, SubOptions, Topic
+from classes.structure import Article, Category, Credits, Links, SubOptions, Topic
 
 links = [
     Links(
@@ -16,7 +14,7 @@ links = [
     Links(
         label="ModMail Invite",
         url="https://modmail.xyz/invite",
-        emoji="<:invite:993989507110146140>",
+        emoji="<:ModmailInvite:995422671762358422>",
     ),
 ]
 
@@ -28,7 +26,7 @@ initial = Category(
             id=1.0,
             description="Solutions for issues users need to fix from their end",
             content="Select an option from the dropdown to find help for a issue you are having.",
-            emoji="📝",
+            emoji="<:CommonTroubleshootingForUsers:995419090808229978>",
             colour=0x1E90FF,
         ),
         Topic(
@@ -36,21 +34,21 @@ initial = Category(
             id=2.0,
             description="Setting the bot up, Using a different category, and more",
             content="Will include all / most setup commands + gifs on running each command (or just a simple screenshot)",
-            emoji="<:Discord_Certified_Moderator:892788741406605372>",
+            emoji="<:HowDoISetupCertainAspectsOfMM:995419312435232920>",
         ),
         Topic(
             label="ModMail Premium",
             id=3.0,
             description="Topics related to Modmail premium",
             content=" Modmail premium is a service that allows users to purchase premium features on Modmail.",
-            emoji="<a:confuseddog:796261369136939038>",
+            emoji="<:ModmailPremium:995419968986435716>",
         ),
         Topic(
             label="How do I use X command",
             id=4.0,
             description="Examples on how to use each of the configuration commands",
             content="Select a option below to find out how to use a command.",
-            emoji="<a:pepeNoted:940729367250755624>",
+            emoji="<:HowDoIUseXCommand:995420187379638433>",
         ),
     ]
 )
@@ -69,10 +67,6 @@ trouleshooting = SubOptions(
             label="ModMail told me to verify",
             id=1.2,
             content="""Hi, if you can't verify try the following steps 1.Check you are logged in to the correct Discord account on your borwser. Click the link [here](<https://discord.com/login>) or the button below to check you are logged in correctly. 2. Try opening the verfication link in incognito mode, Yes this works on mobile. Copy paste the following link in your browser: <https://modmail.xyz/login?redirect=/authorized>""",
-            # links={
-            #     "Discord Login": "https://discord.com/login",
-            #     "ModMail Verification": "https://modmail.xyz/login?redirect=/authorized",
-            # },
             links=[
                 Links(label="Discord Login", url="https://discord.com/login"),
                 Links(
@@ -171,7 +165,6 @@ premium = SubOptions(
             label="Where can I buy premium?",
             id=3.1,
             content="You can buy premium on Modmails website on the [premium page](https://modmail.xyz/premium).",
-            # links={"Buy Premium": "https://modmail.xyz/premium"},
             links=[Links(label="Buy Premium", url="https://modmail.xyz/premium")],
         ),
         Article(
@@ -210,7 +203,6 @@ premium = SubOptions(
             *Note: We can manually assign patron roles to those who do not join before purchase however the user will need to provide proof of payment via a ModMail ticket and the process could take a few hours while we wait for an administrator to be available.*
             """,
             image="https://media.discordapp.net/attachments/576765224460353589/929004300951253012/unknown.png",
-            # links={"Premium": "https://modmail.xyz/premium"},
             links=[
                 Links(label="Premium", url="https://modmail.xyz/premium"),
             ],
