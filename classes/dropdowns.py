@@ -63,7 +63,7 @@ class AlphaDropdown(Select):
         # elif float(self.values[0]) == 5.0:
         #     menu = initial.articles[4]
 
-        for key, value in mainoptions_mapping.items():
+        for key in mainoptions_mapping.keys():
             if float(self.values[0]) == key:
                 menu = initial.articles[int(key) - 1]
 
