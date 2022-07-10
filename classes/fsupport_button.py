@@ -1,6 +1,6 @@
 from logging import getLogger
 
-from discord import ButtonStyle, Colour, Embed, HTTPException, Interaction
+from discord import ButtonStyle, Colour, Embed, Forbidden, HTTPException, Interaction
 from discord.ui import Button, View
 
 from classes.config import Config
@@ -44,18 +44,21 @@ class RoleAdd(Button):
         role = interaction.guild.get_role(int(Config().further_support_role))
         if role is None:
             log.error(
-                f"Could not find role for further support with id: '{Config().further_support_role}'"
+                f"Could not find a role with ID '{Config().further_support_role_id}', it's returning 'None'"
             )
             return
         try:
             await interaction.user.add_roles(
                 *[role], reason="User requested further support"
             )
-        except HTTPException:
+        except Forbidden as e:
             log.error(
-                f"Could not add role for further support with id: '{Config().further_support_role}' to user: '{interaction.author}' ('{interaction.author.id}')"
+                f"Could not remove '{role.name}' from '{interaction.user.name}', bot has insufficient permissions\n{e}"
             )
-            return
+        except HTTPException as e:
+            log.error(
+                f"Could not remove '{role.name}' from '{interaction.user.name}', adding the roles failed\n{e}"
+            )
         await interaction.response.send_message(
             f"You have been given the {role.mention} role to gain access to the further support channel.",
             ephemeral=True,

@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from logging import getLogger
+from tkinter import N
 
 from discord import Colour, Embed, PartialEmoji
 
@@ -20,19 +21,25 @@ class CustomEmbed(Embed):
 
 
 @dataclass(kw_only=True)
+class Links:
+    label: str
+    url: str = None
+    emoji: PartialEmoji.from_str = None
+    disabled: bool = False
+    custom_id: str = None
+    row: int = None
+
+
+@dataclass(kw_only=True)
 class Article:
     label: str
     id: float
+    description: str = None
     content: str
     image: str = None
-    links: dict[str, str] = None
+    links: list[Links] = None
     emoji: PartialEmoji.from_str = None
     colour: Colour.from_str = 0x1E90FF
-
-
-@dataclass
-class SubOptions:
-    options: list[Article]
 
 
 @dataclass(kw_only=True)
@@ -43,13 +50,7 @@ class Topic:
     content: str
     emoji: PartialEmoji.from_str = None
     colour: Colour = 0x1E90FF
-    links: dict[str, str] = None
-
-
-@dataclass(kw_only=True)
-class Credits:
-    text: str
-    emoji: str = None
+    links: list[Links] = None
 
 
 @dataclass
@@ -57,14 +58,9 @@ class Category:
     articles: list[Topic]
 
 
-@dataclass(kw_only=True)
-class Links:
-    label: str
-    url: str = None
-    emoji: PartialEmoji.from_str = None
-    disabled: bool = False
-    custom_id: str = None
-    row: int = None
+@dataclass
+class SubOptions:
+    options: list[Article]
 
 
 @dataclass(kw_only=True)

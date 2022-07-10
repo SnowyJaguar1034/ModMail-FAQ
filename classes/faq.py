@@ -29,9 +29,9 @@ class FAQ_Client(Client):
         log.info(f"Client version; {self.version}")
         log.info(f"Client Start Time; {self.start_time}")
         self.add_view(PersistentView())
-        self.tree.copy_global_to(guild=self.modmail_support)
+        # self.tree.copy_global_to(guild=self.modmail_support)
         await self.tree.sync(
-            guild=self.modmail_support
+            # guild=self.modmail_support
         )  # Sync the command tree to the client
 
     async def main(self):

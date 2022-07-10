@@ -1,4 +1,4 @@
-from classes.structure import Article, Category, Credits, Links, SubOptions, Topic
+from classes.structure import Article, Category, Links, SubOptions, Topic
 
 links = [
     Links(
@@ -27,7 +27,6 @@ initial = Category(
             description="Solutions for issues users need to fix from their end",
             content="Select an option from the dropdown to find help for a issue you are having.",
             emoji="<:CommonTroubleshootingForUsers:995419090808229978>",
-            colour=0x1E90FF,
         ),
         Topic(
             label="How to setup certain aspects of ModMail",
@@ -61,17 +60,22 @@ trouleshooting = SubOptions(
             id=1.1,
             content='Check your Privacy Settings for the server you are trying to contact. Enable "allow direct messages for server members"',
             image="https://cdn.discordapp.com/attachments/972598239159283723/986749079218446377/Discord_8aN2padDIt.gif",
-            emoji="<a:pepeNoted:940729367250755624>",
+            emoji="<:clyde:995754294571704330>",
         ),
         Article(
             label="ModMail told me to verify",
             id=1.2,
             content="""Hi, if you can't verify try the following steps 1.Check you are logged in to the correct Discord account on your borwser. Click the link [here](<https://discord.com/login>) or the button below to check you are logged in correctly. 2. Try opening the verfication link in incognito mode, Yes this works on mobile. Copy paste the following link in your browser: <https://modmail.xyz/login?redirect=/authorized>""",
             links=[
-                Links(label="Discord Login", url="https://discord.com/login"),
+                Links(
+                    label="Discord Login",
+                    url="https://discord.com/login",
+                    emoji="<:discord_logo:995748547074994206>",
+                ),
                 Links(
                     label="ModMail Verification",
                     url="https://modmail.xyz/login?redirect=/authorized",
+                    emoji="<:modamil_logo:993989822173696050>",
                 ),
             ],
             emoji="<a:redsiren:853297746626609174>",
@@ -165,7 +169,13 @@ premium = SubOptions(
             label="Where can I buy premium?",
             id=3.1,
             content="You can buy premium on Modmails website on the [premium page](https://modmail.xyz/premium).",
-            links=[Links(label="Buy Premium", url="https://modmail.xyz/premium")],
+            links=[
+                Links(
+                    label="Buy Premium",
+                    url="https://modmail.xyz/premium",
+                    emoji="<:modamil_logo:993989822173696050>",
+                )
+            ],
         ),
         Article(
             label="What are the perks of Modmail Premium?",
@@ -191,6 +201,7 @@ premium = SubOptions(
             label="What payment methods are supported?",
             id=3.3,
             content="ModMail currently only supports PayPal.",
+            emoji="<:paypal:995755934737518643>",
         ),
         Article(
             label=" Issues with premium",
@@ -204,7 +215,11 @@ premium = SubOptions(
             """,
             image="https://media.discordapp.net/attachments/576765224460353589/929004300951253012/unknown.png",
             links=[
-                Links(label="Premium", url="https://modmail.xyz/premium"),
+                Links(
+                    label="Premium",
+                    url="https://modmail.xyz/premium",
+                    emoji="<:modamil_logo:993989822173696050>",
+                ),
             ],
         ),
         Article(
@@ -310,7 +325,6 @@ how_to_commands = SubOptions(
             id=4.10,
             content='To allow people to respond to tickets they need to have a access role. You can set these with the `=accessrole <role mention|role id|role name>` command. You can set up to 10 different access roles. If a role you are adding by name has a space in the name then you need to wrap the name in `" "` e.g. `=accessrole "Staff Team"`.',
             image="https://cdn.discordapp.com/attachments/972598239159283723/986614689725288459/Discord_Pa6RN5xMTH.gif",
-            emoji="🔒",
         ),
     ]
 )

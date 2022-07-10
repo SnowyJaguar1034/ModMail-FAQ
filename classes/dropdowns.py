@@ -1,4 +1,5 @@
 from logging import getLogger
+from typing import Optional
 
 from discord import ButtonStyle, Embed, Interaction, PartialEmoji, SelectOption
 from discord.ui import Button, Select, View
@@ -8,19 +9,19 @@ from utils.mappings import mainoptions_mapping, suboption_mapping
 from classes.config import Config
 from classes.fsupport_button import FSupportButton
 
-from .structure import CustomEmbed
+from .structure import CustomEmbed, SubOptions
 
 log = getLogger(__name__)
 
 
-# Defines a custom Select containing colour options that the user can choose. The callback function of this class is called when the user changes their choice
+# Defines the main dropdown select menu for the FAQ
 class AlphaDropdown(Select):
     def __init__(self, custom_id: str = "base_alphadropdown") -> None:
         options = [
             SelectOption(
                 label=article.label,
                 description=article.description,
-                emoji=article.emoji,  # PartialEmoji.from_str() if article.emoji else None,
+                emoji=article.emoji,
                 value=str(article.id),
             )
             for article in initial.articles
@@ -44,32 +45,32 @@ class AlphaDropdown(Select):
             custom_id=custom_id,
         )
 
-    async def callback(self, interaction: Interaction):
-        # Figure out the corresponding article to their selection
-
-        # Gets the select option that was clicked on
+    async def callback(self, interaction: Interaction) -> None:
+        # Get the selected option and check if it's a request for further suppor, if it is send the confirmation and stop menu
         if self.values[0] == Config().further_support_role:
             await FSupportButton().callback(interaction)
             return
-        elif float(self.values[0]) == 1.0:
-            menu = initial.articles[0]
-        elif float(self.values[0]) == 2.0:
-            menu = initial.articles[1]
-        elif float(self.values[0]) == 3.0:
-            menu = initial.articles[2]
-        elif float(self.values[0]) == 4.0:
-            menu = initial.articles[3]
-        elif float(self.values[0]) == 5.0:
-            menu = initial.articles[4]
+
+        # Figure out the corresponding article to their selection
+        # elif float(self.values[0]) == 1.0:
+        #     menu = initial.articles[0]
+        # elif float(self.values[0]) == 2.0:
+        #     menu = initial.articles[1]
+        # elif float(self.values[0]) == 3.0:
+        #     menu = initial.articles[2]
+        # elif float(self.values[0]) == 4.0:
+        #     menu = initial.articles[3]
+        # elif float(self.values[0]) == 5.0:
+        #     menu = initial.articles[4]
+
+        for key, value in mainoptions_mapping.items():
+            if float(self.values[0]) == key:
+                menu = initial.articles[int(key) - 1]
 
         embed = CustomEmbed(
             title=menu.label,
-            description=f"{menu.description}\n{menu.content}",
-            colour=menu.colour,
+            description=f"{menu.description}\n\n{menu.content}",
         )
-        # embed.set_footer(
-        #     text=credits.text, icon_url=PartialEmoji.from_str(credits.emoji).url
-        # )
 
         # Figure out the sub-questions to display
         options_to_show = suboption_mapping.get(float(self.values[0]))
@@ -86,24 +87,20 @@ class AlphaDropdown(Select):
         # Create a View object and generate the embed with the sub-questions
         view = View()
         view.add_item(BetaDropdown(options_to_show, next_options))
-        embed = CustomEmbed(
-            title=mainoptions_mapping[float(self.values[0])],
-            description="\n\n".join(
-                [f"**{article.label}**" for article in options_to_show.options]
-            ),
-            colour=menu.colour,
-        )
-        # embed.set_footer(
-        #     text=credits.text, icon_url=PartialEmoji.from_str(credits.emoji).url
-        # )
+        for article in options_to_show.options:
+            embed.add_field(
+                name=article.label,
+                value=article.description if article.description else "\u200b",
+                inline=False,
+            )
         await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
 
-# Defines a custom Select containing colour options that the user can choose. The callback function of this class is called when the user changes their choice
+# Defines the sub dropdown for the selected FAQ option
 class BetaDropdown(Select):
     def __init__(
         self,
-        sub_option,
+        sub_option: Optional[SubOptions],
         options: list[SelectOption],
     ):
         self.sub_option = sub_option
@@ -114,17 +111,13 @@ class BetaDropdown(Select):
             options=options,
         )
 
-    async def callback(self, interaction: Interaction):
+    async def callback(self, interaction: Interaction) -> None:
         embed = CustomEmbed(title=self.values[0])
-        # embed.set_footer(
-        #     text=credits.text, icon_url=PartialEmoji.from_str(credits.emoji).url
-        # )
+
         for question in self.sub_option.options:
-            embed.color = question.colour
             # Figure out which sub question was chosen and get the content (answer) of the question
             if question.label == self.values[0]:  # .value
                 embed.description = question.content
-                embed.colour = question.colour
 
                 if question.image:
                     embed.set_image(url=question.image)
@@ -132,7 +125,9 @@ class BetaDropdown(Select):
                 view = View()
                 if question.links:
                     for link in question.links:
-                        view.add_item(Button(label=link.label, url=link.url))
+                        view.add_item(
+                            Button(label=link.label, url=link.url, emoji=link.emoji)
+                        )
                 view.add_item(FSupportButton())
 
         await interaction.response.send_message(embed=embed, ephemeral=True, view=view)
