@@ -1,7 +1,5 @@
 from logging import getLogger
-from re import L
 
-from attr import s
 from discord import ButtonStyle, Embed, HTTPException, Interaction
 from discord.ui import Button, View, button
 from topics import links

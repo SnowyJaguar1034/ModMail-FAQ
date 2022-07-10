@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from logging import getLogger
-from tkinter import N
 
 from discord import Colour, Embed, PartialEmoji
 
