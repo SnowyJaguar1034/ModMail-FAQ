@@ -78,7 +78,6 @@ trouleshooting = SubOptions(
                     emoji="<:modamil_logo:993989822173696050>",
                 ),
             ],
-            emoji="<a:redsiren:853297746626609174>",
         ),
     ]
 )
@@ -123,7 +122,6 @@ aspects = SubOptions(
             label=" Why is the custom emote I sent not working?",
             id=2.4,
             content="Due to Discord requirements; the bot needs to be in the server where the emote is from in order to use it. Otherwise, the emote will show up as `:emote_name:` instead of the actual emote.",
-            emoji="<a:community_points:857633011830226944>",
         ),
         Article(
             label=" Why is the ModMail log not working?",
@@ -195,7 +193,6 @@ premium = SubOptions(
                     - `=snippet <snippet name>` / `=a <snippet name>`
                     - `=asnippet <snippet name>` / `=as <snippet name>`
                     """,
-            emoji="<:full_star:983027888544702464>",
         ),
         Article(
             label="What payment methods are supported?",

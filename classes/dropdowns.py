@@ -29,7 +29,7 @@ class AlphaDropdown(Select):
         options.append(
             SelectOption(
                 label="I couldn't find what I'm looking for!",
-                value=Config().further_support_role,
+                value=Config().FURTHER_SUPPORT_ROLE,
                 emoji="<:ICouldntFindWhatImLookingFor:995421072340037725>",
             )
         )
@@ -47,7 +47,7 @@ class AlphaDropdown(Select):
 
     async def callback(self, interaction: Interaction) -> None:
         # Get the selected option and check if it's a request for further suppor, if it is send the confirmation and stop menu
-        if self.values[0] == Config().further_support_role:
+        if self.values[0] == Config().FURTHER_SUPPORT_ROLE:
             await FSupportButton().callback(interaction)
             return
 

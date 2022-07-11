@@ -9,6 +9,8 @@ from classes.persistent_view import PersistentView
 
 log = getLogger(__name__)
 
+# config = Config().load()
+
 
 class FAQ_Client(Client):
     def __init__(self, **kwargs):
@@ -16,8 +18,10 @@ class FAQ_Client(Client):
         self.start_time = datetime.utcnow()
         self.tree = app_commands.CommandTree(self)
         self.config = Config().load()
-        self.modmail_support = Object(self.config.guild)
-        self.version = self.config.version
+        # print(f"Guild: {self.config.GUILD} ({self.config.guild})")
+        # print(f"Token: {self.config.TOKEN} ({self.config.token})")
+        self.modmail_support = Object(self.config.GUILD)
+        self.version = self.config.VERSION
 
     @property
     def uptime(self):
@@ -38,4 +42,4 @@ class FAQ_Client(Client):
         async with ClientSession() as session:
             async with self:
                 self.session = session
-                await self.start(self.config.token)
+                await self.start(self.config.TOKEN)

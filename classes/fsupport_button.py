@@ -41,10 +41,10 @@ class RoleAdd(Button):
 
     async def callback(self, interaction: Interaction):
         # get the further support role from the clients cache
-        role = interaction.guild.get_role(int(Config().further_support_role))
+        role = interaction.guild.get_role(int(Config().FURTHER_SUPPORT_ROLE))
         if role is None:
             log.error(
-                f"Could not find a role with ID '{Config().further_support_role_id}', it's returning 'None'"
+                f"Could not find a role with ID '{Config().FURTHER_SUPPORT_ROLE}', it's returning 'None'"
             )
             return
         try:

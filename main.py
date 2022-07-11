@@ -31,11 +31,11 @@ intents.emojis = True
 client = FAQ_Client(
     intents=intents,
 )
-client.activity = Activity(name=client.config.activity, type=ActivityType.watching)
-client.description = client.config.description
+client.activity = Activity(name=client.config.ACTIVITY, type=ActivityType.watching)
+client.description = client.config.DESCRIPTION
 client.owner_ids = (
-    [owner_id for owner_id in client.config.owners.strip().split(",")]
-    if client.config.owners is not None
+    [owner_id for owner_id in client.config.OWNERS.strip().split(",")]
+    if client.config.OWNERS is not None
     else []
 )
 client.case_insensitive = True
@@ -84,7 +84,7 @@ async def generate_dropdown(
     embed = CustomEmbed(
         title="Welcome to the ModMail Help Center!",
         description="This is an **interactive FAQ** where you can find answers to common questions about ModMail. Use the Select Menu below to navigate through the FAQ.",
-        colour=Colour.from_str(client.config.default_colour),
+        colour=Colour.from_str(client.config.DEFAULT_COLOUR),
     )
     return view, embed
 
@@ -92,10 +92,12 @@ async def generate_dropdown(
 async def end_further_support(
     interaction: Interaction, user: Union[User, Member] = None
 ):
-    role = interaction.guild.get_role(client.config.further_support_role_id)
+    log.critical(f"Role ID: {client.config.FURTHER_SUPPORT_ROLE}")
+    role = interaction.guild.get_role(int(client.config.FURTHER_SUPPORT_ROLE))
+    log.critical(f"Role Object: {role}")
     if role is None:
         log.error(
-            f"Could not find a role with ID '{client.config.further_support_role_id}', it's returning 'None'"
+            f"Could not find a role with ID '{client.config.FURTHER_SUPPORT_ROLE}', it's returning 'None'"
         )
     try:
         await interaction.user.remove_roles(
