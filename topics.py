@@ -1,5 +1,7 @@
 from classes.structure import Article, Category, Links, SubOptions, Topic
 
+data = {}
+
 links = [
     Links(
         label="GitHub",
@@ -325,3 +327,5 @@ how_to_commands = SubOptions(
         ),
     ]
 )
+
+# Write  a human readble structure of adding all of the above lists into the data dictionairy varible.

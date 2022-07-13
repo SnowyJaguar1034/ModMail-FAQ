@@ -9,8 +9,6 @@ from classes.persistent_view import PersistentView
 
 log = getLogger(__name__)
 
-# config = Config().load()
-
 
 class FAQ_Client(Client):
     def __init__(self, **kwargs):
