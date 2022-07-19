@@ -35,10 +35,10 @@ class Article:
     id: float
     description: str = None
     content: str
-    image: str = None
-    links: list[Links] = None
     emoji: PartialEmoji.from_str = None
+    image: str = None
     colour: Colour.from_str = 0x1E90FF
+    links: list[Links] = None
 
 
 @dataclass(kw_only=True)

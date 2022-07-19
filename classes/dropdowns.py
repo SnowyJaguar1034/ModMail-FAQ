@@ -3,7 +3,7 @@ from typing import Optional
 
 from discord import ButtonStyle, Embed, Interaction, PartialEmoji, SelectOption
 from discord.ui import Button, Select, View
-from topics import initial
+from topics import initial, rules
 from utils.mappings import mainoptions_mapping, suboption_mapping
 
 from classes.config import Config
@@ -87,12 +87,27 @@ class AlphaDropdown(Select):
         # Create a View object and generate the embed with the sub-questions
         view = View()
         view.add_item(BetaDropdown(options_to_show, next_options))
-        for article in options_to_show.options:
-            embed.add_field(
-                name=article.label,
-                value=article.description if article.description else "\u200b",
-                inline=False,
-            )
+
+        if float(self.values[0]) == initial.articles[0].id:
+            for rule in rules.options:
+                embed.add_field(
+                    name=f"{f'{rule.id}'.split('.')[1]}. {rule.label}",
+                    value=rule.content,
+                    inline=False,
+                )
+                if rule.links:
+                    for link in rule.links:
+                        view.add_item(
+                            Button(label=link.label, url=link.url, emoji=link.emoji)
+                        )
+        else:
+            for article in options_to_show.options:
+                if float(self.values[0]) != initial.articles[0].id:
+                    embed.add_field(
+                        name=article.label,
+                        value=article.description if article.description else "\u200b",
+                        inline=False,
+                    )
         await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
 
