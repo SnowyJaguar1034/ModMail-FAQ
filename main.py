@@ -1,5 +1,13 @@
 from asyncio import run
-from logging import INFO, FileHandler, Formatter, StreamHandler, basicConfig, getLogger
+from logging import (
+    DEBUG,
+    INFO,
+    FileHandler,
+    Formatter,
+    StreamHandler,
+    basicConfig,
+    getLogger,
+)
 from typing import Optional, Tuple, Union
 
 from discord import (
@@ -15,13 +23,12 @@ from discord import (
     User,
     app_commands,
 )
-from discord.ui import Button, View
+from discord.ui import View
 
-from classes.dropdowns import AlphaDropdown
 from classes.faq import FAQ_Client
-from classes.persistent_view import PersistentView
 from classes.structure import CustomEmbed
-from topics import links
+from classes.views import PersistentView, VolatileView
+from topics import data
 
 intents = Intents.default()
 intents.message_content = True
@@ -63,23 +70,13 @@ log = getLogger(__name__)
 
 async def generate_dropdown(
     persistant: bool = False,
-) -> Tuple[View, PersistentView, Embed]:
-    if persistant is not True:
-        view = View()
-        view.add_item(AlphaDropdown())
-        for link in links:
-            view.add_item(
-                Button(
-                    label=link.label,
-                    emoji=link.emoji,
-                    url=link.url,
-                    disabled=link.disabled,
-                    row=link.row,
-                )
-            )
+) -> Tuple[VolatileView, PersistentView, Embed]:
+    # if persistant is not True:
+    #     view = VolatileView()
 
-    elif persistant is True:
-        view = PersistentView()
+    # elif persistant is True:
+    #     view = PersistentView()
+    view = PersistentView() if persistant is True else VolatileView()
 
     embed = CustomEmbed(
         title="Welcome to the ModMail Help Center!",
@@ -191,4 +188,8 @@ async def remove(interaction: Interaction, user: Union[User, Member]):
 
 
 if __name__ == "__main__":
+    log.critical(f"Data Dict; {data}")
+    log.critical(f"Data Dict Keys; {data.keys()}")
+    log.critical(f"Data Dict Values; {data.values()}")
+    log.critical(f"Data Dict Items; {data.items()}")
     run(client.main())

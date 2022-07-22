@@ -5,7 +5,7 @@ from aiohttp import ClientSession
 from discord import Client, Object, app_commands
 
 from classes.config import Config
-from classes.persistent_view import PersistentView
+from classes.views import PersistentView
 
 log = getLogger(__name__)
 
@@ -16,8 +16,6 @@ class FAQ_Client(Client):
         self.start_time = datetime.utcnow()
         self.tree = app_commands.CommandTree(self)
         self.config = Config().load()
-        # print(f"Guild: {self.config.GUILD} ({self.config.guild})")
-        # print(f"Token: {self.config.TOKEN} ({self.config.token})")
         self.modmail_support = Object(self.config.GUILD)
         self.version = self.config.VERSION
 

@@ -1,15 +1,15 @@
 from logging import getLogger
 from typing import Optional
 
-from discord import ButtonStyle, Embed, Interaction, PartialEmoji, SelectOption
+from discord import Interaction, SelectOption
 from discord.ui import Button, Select, View
-from topics import initial, rules
+from topics import initial
 from utils.mappings import mainoptions_mapping, suboption_mapping
 
+from classes.buttons import FSupportButton
 from classes.config import Config
-from classes.fsupport_button import FSupportButton
 
-from .structure import CustomEmbed, SubOptions
+from .structure import CustomEmbed, Options  # SubOptions
 
 log = getLogger(__name__)
 
@@ -24,7 +24,7 @@ class AlphaDropdown(Select):
                 emoji=article.emoji,
                 value=str(article.id),
             )
-            for article in initial.articles
+            for article in initial.options
         ]
         options.append(
             SelectOption(
@@ -52,20 +52,10 @@ class AlphaDropdown(Select):
             return
 
         # Figure out the corresponding article to their selection
-        # elif float(self.values[0]) == 1.0:
-        #     menu = initial.articles[0]
-        # elif float(self.values[0]) == 2.0:
-        #     menu = initial.articles[1]
-        # elif float(self.values[0]) == 3.0:
-        #     menu = initial.articles[2]
-        # elif float(self.values[0]) == 4.0:
-        #     menu = initial.articles[3]
-        # elif float(self.values[0]) == 5.0:
-        #     menu = initial.articles[4]
 
         for key in mainoptions_mapping.keys():
             if float(self.values[0]) == key:
-                menu = initial.articles[int(key) - 1]
+                menu = initial.options[int(key) - 1]
 
         embed = CustomEmbed(
             title=menu.label,
@@ -88,26 +78,13 @@ class AlphaDropdown(Select):
         view = View()
         view.add_item(BetaDropdown(options_to_show, next_options))
 
-        if float(self.values[0]) == initial.articles[0].id:
-            for rule in rules.options:
+        for article in options_to_show.options:
+            if float(self.values[0]) != initial.options[0].id:
                 embed.add_field(
-                    name=f"{f'{rule.id}'.split('.')[1]}. {rule.label}",
-                    value=rule.content,
+                    name=article.label,
+                    value=article.description if article.description else "\u200b",
                     inline=False,
                 )
-                if rule.links:
-                    for link in rule.links:
-                        view.add_item(
-                            Button(label=link.label, url=link.url, emoji=link.emoji)
-                        )
-        else:
-            for article in options_to_show.options:
-                if float(self.values[0]) != initial.articles[0].id:
-                    embed.add_field(
-                        name=article.label,
-                        value=article.description if article.description else "\u200b",
-                        inline=False,
-                    )
         await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
 
@@ -115,7 +92,7 @@ class AlphaDropdown(Select):
 class BetaDropdown(Select):
     def __init__(
         self,
-        sub_option: Optional[SubOptions],
+        sub_option: Optional[Options],
         options: list[SelectOption],
     ):
         self.sub_option = sub_option

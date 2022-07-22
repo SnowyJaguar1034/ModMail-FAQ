@@ -11,12 +11,6 @@ class CustomEmbed(Embed):
         if "colour" not in kwargs:
             kwargs["colour"] = Colour(0x1E90FF)
         super().__init__(*args, **kwargs)
-        self.set_footer(
-            text="Thanks for the Icons server for giving us permission to use their lovely icons within our support system",
-            icon_url=PartialEmoji.from_str(
-                "<:IconsServerCredit:995423046397599764>"
-            ).url,
-        )
 
 
 @dataclass(kw_only=True)
@@ -30,7 +24,7 @@ class Links:
 
 
 @dataclass(kw_only=True)
-class Article:
+class Topic:
     label: str
     id: float
     description: str = None
@@ -41,25 +35,9 @@ class Article:
     links: list[Links] = None
 
 
-@dataclass(kw_only=True)
-class Topic:
-    label: str
-    id: float
-    description: str
-    content: str
-    emoji: PartialEmoji.from_str = None
-    colour: Colour = 0x1E90FF
-    links: list[Links] = None
-
-
 @dataclass
-class Category:
-    articles: list[Topic]
-
-
-@dataclass
-class SubOptions:
-    options: list[Article]
+class Options:  # Category
+    options: list[Topic]
 
 
 @dataclass(kw_only=True)
