@@ -71,11 +71,7 @@ log = getLogger(__name__)
 async def generate_dropdown(
     persistant: bool = False,
 ) -> Tuple[VolatileView, PersistentView, Embed]:
-    # if persistant is not True:
-    #     view = VolatileView()
 
-    # elif persistant is True:
-    #     view = PersistentView()
     view = PersistentView() if persistant is True else VolatileView()
 
     embed = CustomEmbed(
@@ -188,8 +184,9 @@ async def remove(interaction: Interaction, user: Union[User, Member]):
 
 
 if __name__ == "__main__":
-    log.critical(f"Data Dict; {data}")
-    log.critical(f"Data Dict Keys; {data.keys()}")
-    log.critical(f"Data Dict Values; {data.values()}")
-    log.critical(f"Data Dict Items; {data.items()}")
+    # log.critical(f"Data Dict; {data}")
+    # log.critical(f"Data Dict Keys; {data.keys()}")
+    # log.critical(f"Data Dict Values; {data.values()}")
+    # log.critical(f"Data Dict Items; {data.items()}")
+    # log.critical(f"Data Dict Links; {data['links']}")
     run(client.main())

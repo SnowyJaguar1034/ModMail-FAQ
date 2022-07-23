@@ -10,7 +10,7 @@ from discord import (
     PartialEmoji,
 )
 from discord.ui import Button, View
-from topics import rules
+from topics import data  # ,rules
 
 from classes.config import Config
 from classes.structure import CustomEmbed

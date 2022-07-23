@@ -3,7 +3,7 @@ from typing import Optional
 
 from discord import Interaction, SelectOption
 from discord.ui import Button, Select, View
-from topics import initial
+from topics import data  # homepage
 from utils.mappings import mainoptions_mapping, suboption_mapping
 
 from classes.buttons import FSupportButton
@@ -19,12 +19,12 @@ class AlphaDropdown(Select):
     def __init__(self, custom_id: str = "base_alphadropdown") -> None:
         options = [
             SelectOption(
-                label=article.label,
-                description=article.description,
-                emoji=article.emoji,
-                value=str(article.id),
+                label=category.label,
+                description=category.description,
+                emoji=category.emoji,
+                value=str(category.id),
             )
-            for article in initial.options
+            for category in data["homepage"].options
         ]
         options.append(
             SelectOption(
@@ -55,8 +55,8 @@ class AlphaDropdown(Select):
 
         for key in mainoptions_mapping.keys():
             if float(self.values[0]) == key:
-                menu = initial.options[int(key) - 1]
-
+                menu = data["homepage"].options[int(key) - 1]
+        log.warning(f"Select Value: {self.values[0]}")
         embed = CustomEmbed(
             title=menu.label,
             description=f"{menu.description}\n\n{menu.content}",
@@ -64,6 +64,7 @@ class AlphaDropdown(Select):
 
         # Figure out the sub-questions to display
         options_to_show = suboption_mapping.get(float(self.values[0]))
+        log.warning(f"Options to show: {options_to_show}")
 
         # Adds each sub question to the select menu options
         next_options: list[SelectOption] = [
@@ -71,15 +72,15 @@ class AlphaDropdown(Select):
                 label=question.label,
                 emoji=question.emoji,  # PartialEmoji.from_str() if question.emoji else None,
             )
-            for question in options_to_show.options
+            for question in options_to_show
         ]
 
         # Create a View object and generate the embed with the sub-questions
         view = View()
         view.add_item(BetaDropdown(options_to_show, next_options))
 
-        for article in options_to_show.options:
-            if float(self.values[0]) != initial.options[0].id:
+        for article in options_to_show:
+            if float(self.values[0]) != data["homepage"].options[0].id:
                 embed.add_field(
                     name=article.label,
                     value=article.description if article.description else "\u200b",

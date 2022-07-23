@@ -1,7 +1,7 @@
 from logging import getLogger
 
 from discord.ui import Button, View, button
-from topics import links
+from topics import data  # , links
 
 from classes.buttons import Credits, Rules
 from classes.dropdowns import AlphaDropdown
@@ -15,7 +15,7 @@ class PersistentView(View):
         # Add the base dropdown to the view
         self.add_item(AlphaDropdown(custom_id="persistent_dropdown"))
         # Loop through the links and add them to the view
-        for link in links:
+        for link in data["links"]:
             self.add_item(
                 Button(
                     label=link.label,
@@ -33,7 +33,7 @@ class VolatileView(View):
         # Add the base dropdown to the view
         self.add_item(AlphaDropdown())
         # Loop through the links and add them to the view
-        for link in links:
+        for link in data["links"]:
             self.add_item(
                 Button(
                     label=link.label,
