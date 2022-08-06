@@ -1,10 +1,12 @@
 from asyncio import run
 from logging import INFO, FileHandler, Formatter, StreamHandler, basicConfig, getLogger
+from re import I
 from typing import Optional, Tuple, Union
 
 from discord import (
     Activity,
     ActivityType,
+    Attachment,
     Colour,
     Embed,
     Forbidden,
@@ -15,30 +17,14 @@ from discord import (
     User,
     app_commands,
 )
-from discord.ui import Button, View
+from discord.app_commands import Group
+from discord.ui import View
 
-from classes.dropdowns import AlphaDropdown
 from classes.faq import FAQ_Client
-from classes.persistent_view import PersistentView
+from classes.modals import CustomInstanceRequest
 from classes.structure import CustomEmbed
-from topics import links
-
-intents = Intents.default()
-intents.message_content = True
-intents.members = True
-intents.emojis = True
-
-client = FAQ_Client(
-    intents=intents,
-)
-client.activity = Activity(name=client.config.ACTIVITY, type=ActivityType.watching)
-client.description = client.config.DESCRIPTION
-client.owner_ids = (
-    [owner_id for owner_id in client.config.OWNERS.strip().split(",")]
-    if client.config.OWNERS is not None
-    else []
-)
-client.case_insensitive = True
+from classes.views import PersistentView, VolatileView
+from utils import further_support
 
 basicConfig(level=INFO)
 logger = getLogger()
@@ -60,26 +46,28 @@ logger.addHandler(file)
 
 log = getLogger(__name__)
 
+intents = Intents.default()
+intents.message_content = True
+intents.members = True
+intents.emojis = True
+
+client = FAQ_Client(
+    intents=intents,
+)
+client.activity = Activity(name=client.config.ACTIVITY, type=ActivityType.watching)
+# client.description = client.config.DESCRIPTION
+client.owner_ids = (
+    [owner_id for owner_id in client.config.OWNERS.strip().split(",")]
+    if client.config.OWNERS is not None
+    else []
+)
+client.case_insensitive = True
+
 
 async def generate_dropdown(
     persistant: bool = False,
 ) -> Tuple[View, PersistentView, Embed]:
-    if persistant is not True:
-        view = View()
-        view.add_item(AlphaDropdown())
-        for link in links:
-            view.add_item(
-                Button(
-                    label=link.label,
-                    emoji=link.emoji,
-                    url=link.url,
-                    disabled=link.disabled,
-                    row=link.row,
-                )
-            )
-
-    elif persistant is True:
-        view = PersistentView()
+    view = PersistentView() if persistant is True else VolatileView()
 
     embed = CustomEmbed(
         title="Welcome to the ModMail Help Center!",
@@ -89,44 +77,29 @@ async def generate_dropdown(
     return view, embed
 
 
-async def end_further_support(
-    interaction: Interaction, user: Union[User, Member] = None
-):
-    log.critical(f"Role ID: {client.config.FURTHER_SUPPORT_ROLE}")
-    role = interaction.guild.get_role(int(client.config.FURTHER_SUPPORT_ROLE))
-    log.critical(f"Role Object: {role}")
-    if role is None:
-        log.error(
-            f"Could not find a role with ID '{client.config.FURTHER_SUPPORT_ROLE}', it's returning 'None'"
-        )
-    try:
-        await interaction.user.remove_roles(
-            *[role],
-            reason="User no longer needs further support",
-        )
-    except Forbidden as e:
-        log.error(
-            f"Could not remove '{role.name}' from '{user.name}', bot has insufficient permissions\n{e}"
-        )
-    except HTTPException:
-        log.error(
-            f"Could not remove '{role.name}' from '{user.name}', adding the roles failed\n{e}"
-        )
-    await interaction.response.send_message(
-        f"Successfully removed {user.mention} from {role.mention}.",
-        ephemeral=True,
-    )
-
-
 @client.tree.command(name="faq", description="Get support for ModMail")
 async def faq(interaction: Interaction):
     view, embed = await generate_dropdown()
     await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
 
+def is_bot_owner():
+    def predicate(interaction: Interaction) -> bool:
+        if interaction.user.id in client.owner_ids:
+            return True
+
+    return app_commands.check(predicate)
+
+
+@is_bot_owner()
 @client.tree.command(name="post", description="Post the standalone help menu")
 @app_commands.describe(ephemeral="Accepts 'True' or 'False")
 async def post(interaction: Interaction, ephemeral: Optional[bool] = False):
+    if interaction.user.id not in client.owner_ids:
+        return await interaction.response.send_message(
+            "You do not have permission to use this command.",
+            ephemeral=True,
+        )
     view, embed = await generate_dropdown(persistant=True)
     await interaction.response.send_message(embed=embed, view=view, ephemeral=ephemeral)
 
@@ -138,17 +111,21 @@ async def help(interaction: Interaction):
 
 
 @client.tree.command(
-    name="remove", description="Remove a user from the further support role"
+    name="custom",
+    description="Apply for a custom instance of ModMail",
 )
-async def remove(interaction: Interaction, user: Union[User, Member] = None):
-    await end_further_support(interaction, user)
-
-
-@client.tree.context_menu(
-    name="remove",
-)
-async def remove(interaction: Interaction, user: Union[User, Member]):
-    await end_further_support(interaction, user)
+@app_commands.describe(attachment="The profile picture you want for your bot")
+async def custom_instance_application(
+    interaction: Interaction, attachment: Attachment = None
+):
+    channel = client.get_channel(int(client.config.INSTANCE_REQUESTS))
+    await interaction.response.send_modal(
+        CustomInstanceRequest(attachment=attachment, channel=channel)
+    )
+    # await interaction.followup(
+    #     "Your application has been submitted, you will be contacted shortly.",
+    #     ephemeral=True,
+    # )
 
 
 # @client.tree.command(
@@ -189,6 +166,40 @@ async def remove(interaction: Interaction, user: Union[User, Member]):
 
 #     await interaction.response.send_message(embeds=pages, ephemeral=True)
 
+end = Group(name="end", description="Remove a user from the further support role")
+further = Group(
+    name="further",
+    parent=end,
+    description="Remove a user from the further support role",
+)
+
+
+@further.command(
+    name="support",
+    description="Remove a user from the further support role",
+)
+async def support(interaction: Interaction, user: Union[User, Member] = None):
+    await further_support(
+        action="remove",
+        user=user or interaction.user,
+        role=interaction.guild.get_role(int(client.config.FURTHER_SUPPORT_ROLE)),
+        response=interaction.response,
+    )
+
+
+@client.tree.context_menu(
+    name="End Further Support",
+)
+async def remove(interaction: Interaction, user: Union[User, Member]):
+    await further_support(
+        action="remove",
+        user=user or interaction.user,
+        role=interaction.guild.get_role(int(client.config.FURTHER_SUPPORT_ROLE)),
+        response=interaction.response,
+    )
+
+
+client.tree.add_command(end)
 
 if __name__ == "__main__":
     run(client.main())

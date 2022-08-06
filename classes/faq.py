@@ -5,7 +5,7 @@ from aiohttp import ClientSession
 from discord import Client, Object, app_commands
 
 from classes.config import Config
-from classes.persistent_view import PersistentView
+from classes.views import PersistentView
 
 log = getLogger(__name__)
 
