@@ -3,7 +3,7 @@ from typing import Optional
 
 from discord import Interaction, SelectOption
 from discord.ui import Button, Select, View
-from utils import mainoptions_mapping, suboption_mapping
+from mappings import mainoptions_mapping, suboption_mapping
 from topics import initial
 
 from classes.buttons import FSupportButton

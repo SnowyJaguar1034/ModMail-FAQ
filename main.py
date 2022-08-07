@@ -1,16 +1,11 @@
 from asyncio import run
 from logging import INFO, FileHandler, Formatter, StreamHandler, basicConfig, getLogger
-from re import I
-from typing import Optional, Tuple, Union
+from typing import Optional, Union
 
 from discord import (
     Activity,
     ActivityType,
     Attachment,
-    Colour,
-    Embed,
-    Forbidden,
-    HTTPException,
     Intents,
     Interaction,
     Member,
@@ -18,31 +13,11 @@ from discord import (
     app_commands,
 )
 from discord.app_commands import Group
-from discord.ui import View
 
 from classes.faq import FAQ_Client
 from classes.modals import CustomInstanceRequest
-from classes.structure import CustomEmbed
-from classes.views import PersistentView, VolatileView
-from utils import further_support
-
-basicConfig(level=INFO)
-logger = getLogger()
-file = FileHandler(filename="faq.log", encoding="utf-8", mode="w")
-file.setFormatter(
-    Formatter(
-        """
-Time: %(asctime)s: 
-Level: %(levelname)s: 
-Logger: %(name)s: 
-Path: %(pathname)s: 
-Line: %(lineno)d:
-Function: %(funcName)s:
-Message: %(message)s
-"""
-    )
-)
-logger.addHandler(file)
+from further_support import further_support
+from utils import generate_dropdown, is_bot_owner
 
 log = getLogger(__name__)
 
@@ -52,43 +27,16 @@ intents.members = True
 intents.emojis = True
 
 client = FAQ_Client(
-    intents=intents,
+    # intents=intents,
 )
-client.activity = Activity(name=client.config.ACTIVITY, type=ActivityType.watching)
-# client.description = client.config.DESCRIPTION
-client.owner_ids = (
-    [owner_id for owner_id in client.config.OWNERS.strip().split(",")]
-    if client.config.OWNERS is not None
-    else []
-)
-client.case_insensitive = True
-
-
-async def generate_dropdown(
-    persistant: bool = False,
-) -> Tuple[View, PersistentView, Embed]:
-    view = PersistentView() if persistant is True else VolatileView()
-
-    embed = CustomEmbed(
-        title="Welcome to the ModMail Help Center!",
-        description="This is an **interactive FAQ** where you can find answers to common questions about ModMail. Use the Select Menu below to navigate through the FAQ.\n\n> - If your having issues with ModMail as a user, like not being able to DM ModMail, select `Common Troubleshooting for Users`\n> - If your having issues with ModMail as a staff member, like which permissions ModMail needs, select `Common troubleshooting for Staff`\n> - If your having issues with ModMail premium, kike not receiving your patron role, select `Common Issues with Purchasing Premium`\n> - If your looking for a list of commands then select `How do I use X command`\n> - If you cannot find what your are looking for, select 'I can't find what I'm looking for!`",
-        colour=Colour.from_str(client.config.DEFAULT_COLOUR),
-    )
-    return view, embed
-
-
-@client.tree.command(name="faq", description="Get support for ModMail")
-async def faq(interaction: Interaction):
-    view, embed = await generate_dropdown()
-    await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
-
-
-def is_bot_owner():
-    def predicate(interaction: Interaction) -> bool:
-        if interaction.user.id in client.owner_ids:
-            return True
-
-    return app_commands.check(predicate)
+# client.activity = Activity(name=client.config.ACTIVITY, type=ActivityType.watching)
+# # client.description = client.config.DESCRIPTION
+# client.owner_ids = (
+#     [owner_id for owner_id in client.config.OWNERS.strip().split(",")]
+#     if client.config.OWNERS is not None
+#     else []
+# )
+# client.case_insensitive = True
 
 
 @is_bot_owner()
@@ -100,13 +48,25 @@ async def post(interaction: Interaction, ephemeral: Optional[bool] = False):
             "You do not have permission to use this command.",
             ephemeral=True,
         )
-    view, embed = await generate_dropdown(persistant=True)
+    view, embed = await generate_dropdown(
+        default_colour=client.config.DEFAULT_COLOUR, persistant=True
+    )
     await interaction.response.send_message(embed=embed, view=view, ephemeral=ephemeral)
+
+
+@client.tree.command(name="faq", description="Get support for ModMail")
+async def faq(interaction: Interaction):
+    view, embed = await generate_dropdown(
+        defauult_colour=client.config.DEFAULT_COLOUR, persistant=False
+    )
+    await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
 
 @client.tree.command(name="help", description="Get support for ModMail")
 async def help(interaction: Interaction):
-    view, embed = await generate_dropdown()
+    view, embed = await generate_dropdown(
+        defauult_colour=client.config.DEFAULT_COLOUR, persistant=False
+    )
     await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
 

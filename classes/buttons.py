@@ -1,17 +1,9 @@
 from logging import getLogger
 
-from discord import (
-    ButtonStyle,
-    Colour,
-    Embed,
-    Forbidden,
-    HTTPException,
-    Interaction,
-    PartialEmoji,
-)
+from discord import ButtonStyle, Colour, Interaction, PartialEmoji
 from discord.ui import Button, View
+from further_support import further_support
 from topics import rules
-from utils import further_support
 
 from classes.config import Config
 from classes.structure import CustomEmbed

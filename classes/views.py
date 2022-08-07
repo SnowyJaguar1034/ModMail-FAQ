@@ -1,10 +1,10 @@
 from logging import getLogger
 
 from discord.ui import Button, View, button
-from topics import links
 
 from classes.buttons import Credits, Rules
 from classes.dropdowns import AlphaDropdown
+from topics import links
 
 log = getLogger(__name__)
 
