@@ -18,7 +18,7 @@ config = Config().load()
 
 
 class FAQ_Client(Client):
-    def __init__(self, web_client: ClientSession, *args, **kwargs):
+    def __init__(self, web_client: ClientSession = None, *args, **kwargs):
         super().__init__(**kwargs)
         self.start_time = datetime.utcnow()
         self.tree = app_commands.CommandTree(self)
@@ -38,7 +38,7 @@ class FAQ_Client(Client):
         # log.info(f"Client version; {self.version}")
         # log.info(f"Client Start Time; {self.start_time}")
         self.add_view(PersistentView())
-        if self.testing_guild_id:
+        if self.testing_guild:
             # We'll copy in the global commands to test with:
             self.tree.copy_global_to(guild=self.testing_guild)
             # followed by syncing to the testing guild.
@@ -47,37 +47,36 @@ class FAQ_Client(Client):
             # Sync the command tree to the client
             await self.tree.sync()
 
-
-async def main(self):
-    logger = getLogger("discord")
-    logger.setLevel(log_levels[Config().LOG_LEVEL])
-    file = RotatingFileHandler(
-        filename="discord.log",
-        encoding="utf-8",
-        maxBytes=32 * 1024 * 1024,  # 32 MiB
-        backupCount=5,  # Rotate through 5 files)
-    )
-    datetime_format = "%Y-%m-%d %H:%M:%S"
-    formatter = Formatter(
-        "[Time: {asctime}] {levelname:<8}\n(Path: {path})\n [Line: {lineno}] (Function: {funcName}) Logger: {name}\nMessage: {message}",
-        datetime_format,
-        style="{",
-    )
-    file.setFormatter(formatter)
-    logger.addHandler(file)
-    async with ClientSession() as session:
-        async with FAQ_Client(
-            web_client=session,
-            intents=intents,
-            case_insensitive=True,
-            activity=Activity(
-                name=Config().ACTIVITY, type=activities[Config().ACTIVITY_TYPE]
-            ),
-            owner_ids=(
-                [owner_id for owner_id in Config().OWNERS.strip().split(",")]
-                if Config().OWNERS is not None
-                else []
-            ),
-        ) as client:
-            # await client.setup_hook()
-            await client.start(Config().TOKEN)
+    async def main(self):
+        logger = getLogger("discord")
+        logger.setLevel(log_levels[Config().LOG_LEVEL])
+        file = RotatingFileHandler(
+            filename="discord.log",
+            encoding="utf-8",
+            maxBytes=32 * 1024 * 1024,  # 32 MiB
+            backupCount=5,  # Rotate through 5 files)
+        )
+        datetime_format = "%Y-%m-%d %H:%M:%S"
+        formatter = Formatter(
+            "[Time: {asctime}] {levelname:<8}\n(Path: {path})\n [Line: {lineno}] (Function: {funcName}) Logger: {name}\nMessage: {message}",
+            datetime_format,
+            style="{",
+        )
+        file.setFormatter(formatter)
+        logger.addHandler(file)
+        async with ClientSession() as session:
+            async with FAQ_Client(
+                web_client=session,
+                intents=intents,
+                case_insensitive=True,
+                activity=Activity(
+                    name=Config().ACTIVITY, type=activities[Config().ACTIVITY_TYPE]
+                ),
+                owner_ids=(
+                    [owner_id for owner_id in Config().OWNERS.strip().split(",")]
+                    if Config().OWNERS is not None
+                    else []
+                ),
+            ) as client:
+                # await client.setup_hook()
+                await client.start(Config().TOKEN)
