@@ -14,7 +14,7 @@ from discord import (
 )
 from discord.app_commands import Group
 
-from classes.faq import FAQ_Client
+from classes.faq import FAQ_Client, main
 from classes.modals import CustomInstanceRequest
 from further_support import further_support
 from utils import generate_dropdown, is_bot_owner
@@ -162,4 +162,4 @@ async def remove(interaction: Interaction, user: Union[User, Member]):
 client.tree.add_command(end)
 
 if __name__ == "__main__":
-    run(client.main())
+    run(main())

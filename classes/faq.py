@@ -4,7 +4,7 @@ from logging.handlers import RotatingFileHandler
 
 from aiohttp import ClientSession
 from discord import Activity, ActivityType, Client, Intents, Object, app_commands
-from mappings import log_levels
+from mappings import activities, log_levels
 
 from classes.config import Config
 from classes.views import PersistentView
@@ -14,13 +14,15 @@ intents.message_content = True
 intents.members = True
 intents.emojis = True
 
+config = Config().load()
+
 
 class FAQ_Client(Client):
-    def __init__(self, *args, web_client: ClientSession, **kwargs):
+    def __init__(self, web_client: ClientSession, *args, **kwargs):
         super().__init__(**kwargs)
         self.start_time = datetime.utcnow()
         self.tree = app_commands.CommandTree(self)
-        self.config = Config().load()
+        self.config = config
         self.testing_guild = Object(self.config.TESTING_GUILD)
         self.version = self.config.VERSION
         self.log_level = log_levels[self.config.LOG_LEVEL]
@@ -45,37 +47,37 @@ class FAQ_Client(Client):
             # Sync the command tree to the client
             await self.tree.sync()
 
-    # client.description = client.config.DESCRIPTION
-    async def main(self):
-        logger = getLogger("discord")
-        logger.setLevel(self.log_level)
-        file = RotatingFileHandler(
-            filename="discord.log",
-            encoding="utf-8",
-            maxBytes=32 * 1024 * 1024,  # 32 MiB
-            backupCount=5,  # Rotate through 5 files)
-        )
-        datetime_format = "%Y-%m-%d %H:%M:%S"
-        formatter = Formatter(
-            "[Time: {asctime}] {levelname:<8}\n(Path: {path})\n [Line: {lineno}] (Function: {funcName}) Logger: {name}\nMessage: {message}",
-            datetime_format,
-            style="{",
-        )
-        file.setFormatter(formatter)
-        logger.addHandler(file)
-        async with ClientSession() as session:
-            async with FAQ_Client(
-                web_client=session,
-                intents=intents,
-                case_insensitive=True,
-                activity=Activity(
-                    name=self.config.ACTIVITY, type=ActivityType.watching
-                ),
-                owner_ids=(
-                    [owner_id for owner_id in self.config.OWNERS.strip().split(",")]
-                    if self.config.OWNERS is not None
-                    else []
-                ),
-            ) as client:
-                # await client.setup_hook()
-                await client.start(self.config.TOKEN)
+
+async def main(self):
+    logger = getLogger("discord")
+    logger.setLevel(log_levels[Config().LOG_LEVEL])
+    file = RotatingFileHandler(
+        filename="discord.log",
+        encoding="utf-8",
+        maxBytes=32 * 1024 * 1024,  # 32 MiB
+        backupCount=5,  # Rotate through 5 files)
+    )
+    datetime_format = "%Y-%m-%d %H:%M:%S"
+    formatter = Formatter(
+        "[Time: {asctime}] {levelname:<8}\n(Path: {path})\n [Line: {lineno}] (Function: {funcName}) Logger: {name}\nMessage: {message}",
+        datetime_format,
+        style="{",
+    )
+    file.setFormatter(formatter)
+    logger.addHandler(file)
+    async with ClientSession() as session:
+        async with FAQ_Client(
+            web_client=session,
+            intents=intents,
+            case_insensitive=True,
+            activity=Activity(
+                name=Config().ACTIVITY, type=activities[Config().ACTIVITY_TYPE]
+            ),
+            owner_ids=(
+                [owner_id for owner_id in Config().OWNERS.strip().split(",")]
+                if Config().OWNERS is not None
+                else []
+            ),
+        ) as client:
+            # await client.setup_hook()
+            await client.start(Config().TOKEN)

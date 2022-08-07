@@ -1,5 +1,7 @@
 from logging import CRITICAL, DEBUG, ERROR, INFO, WARNING, getLogger
 
+from discord import ActivityType
+
 from topics import aspects, how_to_commands, initial, premium, trouleshooting
 
 log = getLogger(__name__)
@@ -23,4 +25,12 @@ log_levels = {
     "WARNING": WARNING,
     "ERROR": ERROR,
     "CRITICAL": CRITICAL,
+}
+
+activities = {
+    "PLAYING": ActivityType.playing,
+    "STREAMING": ActivityType.streaming,
+    "LISTENING": ActivityType.listening,
+    "WATCHING": ActivityType.watching,
+    "COMPETING": ActivityType.competing,
 }
