@@ -1,7 +1,5 @@
 from logging import Handler, getLogger
 
-from mappings import msg_identifiers
-
 log = getLogger(__name__)
 
 

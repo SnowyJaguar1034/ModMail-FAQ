@@ -45,7 +45,7 @@ email = HTMLSMTPHandler(
     credentials=(Config().MAIL_USER, Config().MAIL_PASS),
     secure=(),
     timeout=Config().MAIL_TIMEOUT,
-    type="HTML",
+    type="PLAIN",
 )
 formatter = Formatter(
     "---------------\n[Time: {asctime}] {levelname}\n(Path: {pathname})\n[Line: {lineno}] (Function: {funcName}) Logger: {name}\nMessage: {message}\n---------------\n",
@@ -53,6 +53,7 @@ formatter = Formatter(
     style="{",
 )
 email.addFilter(CustomFilter())
+email.setLevel(WARNING)
 email_formatter = Formatter(
     """\
     <html>
@@ -75,7 +76,7 @@ email_formatter = Formatter(
 )
 file.setFormatter(formatter)
 console.setFormatter(formatter)
-email.setFormatter(email_formatter)
+email.setFormatter(formatter)
 logger.addHandler(file)
 logger.addHandler(console)
 logger.addHandler(email)
