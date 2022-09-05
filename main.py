@@ -55,7 +55,7 @@ async def post(interaction: Interaction, ephemeral: Optional[bool] = False):
 @client.tree.command(name="faq", description="Get support for ModMail")
 async def faq(interaction: Interaction):
     view, embed = await generate_dropdown(
-        defauult_colour=client.config.DEFAULT_COLOUR, persistant=False
+        default_colour=client.config.DEFAULT_COLOUR, persistant=False
     )
     await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
@@ -63,7 +63,7 @@ async def faq(interaction: Interaction):
 @client.tree.command(name="help", description="Get support for ModMail")
 async def help_command(interaction: Interaction):
     view, embed = await generate_dropdown(
-        defauult_colour=client.config.DEFAULT_COLOUR, persistant=False
+        default_colour=client.config.DEFAULT_COLOUR, persistant=False
     )
     await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
