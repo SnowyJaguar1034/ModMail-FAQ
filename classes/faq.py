@@ -45,7 +45,7 @@ email = HTMLSMTPHandler(
     credentials=(Config().MAIL_USER, Config().MAIL_PASS),
     secure=(),
     timeout=Config().MAIL_TIMEOUT,
-    type="PLAIN",
+    message_type="PLAIN",
 )
 formatter = Formatter(
     "---------------\n[Time: {asctime}] {levelname}\n(Path: {pathname})\n[Line: {lineno}] (Function: {funcName}) Logger: {name}\nMessage: {message}\n---------------\n",

@@ -17,7 +17,7 @@ class HTMLSMTPHandler(Handler):
         credentials=None,
         secure=None,
         timeout=5.0,
-        # type=None,
+        message_type=None,
     ):
         """
         Initialize the handler.
@@ -50,7 +50,7 @@ class HTMLSMTPHandler(Handler):
         self.subject = subject
         self.secure = secure
         self.timeout = timeout
-        self.type = type
+        self.type = message_type
 
     def getSubject(self, record):
         """
