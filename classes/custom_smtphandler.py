@@ -17,7 +17,7 @@ class HTMLSMTPHandler(Handler):
         credentials=None,
         secure=None,
         timeout=5.0,
-        type=None,
+        # type=None,
     ):
         """
         Initialize the handler.

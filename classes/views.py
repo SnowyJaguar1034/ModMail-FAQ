@@ -1,6 +1,6 @@
 from logging import getLogger
 
-from discord.ui import Button, View, button
+from discord.ui import Button, View
 from topics import links
 
 from classes.buttons import Credits, Rules

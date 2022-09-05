@@ -19,7 +19,7 @@ def is_bot_owner():
 
 
 async def generate_dropdown(
-    defauult_colour: str,
+    default_colour: str,
     persistant: bool = False,
 ) -> Tuple[View, PersistentView, Embed]:
     view = PersistentView() if persistant is True else VolatileView()

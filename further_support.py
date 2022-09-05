@@ -24,7 +24,7 @@ async def further_support(
         log.error(
             f"Could not change roles for {user.name} due to insufficient permissions. (Forbidden):\n{e}"
         )
-    except HTTPException:
+    except HTTPException as e:
         log.error(f"Could not change roles for {user.name} due to an HTTP error.\n{e}")
     await response.send_message(
         f"Successfully {action}ed {role.mention} role for {user}",

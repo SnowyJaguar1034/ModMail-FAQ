@@ -12,7 +12,7 @@ from logging import (
 from logging.handlers import RotatingFileHandler, SMTPHandler
 
 from aiohttp import ClientSession
-from discord import Activity, ActivityType, Client, Intents, Object, app_commands
+from discord import Activity, Client, Intents, Object, app_commands  # ActivityType
 from mappings import activities, log_levels
 
 from classes.config import Config
@@ -41,7 +41,7 @@ email = HTMLSMTPHandler(
     mailhost=(Config().MAIL_HOST, Config().MAIL_PORT),
     fromaddr=Config().MAIL_FROM,
     toaddrs=Config().RECIPIENTS.strip(" ").split(","),  # recipients,
-    subject=Config().MAIL_SUBJECT or f"FAQ encountered an error",
+    subject=Config().MAIL_SUBJECT or "FAQ encountered an error",
     credentials=(Config().MAIL_USER, Config().MAIL_PASS),
     secure=(),
     timeout=Config().MAIL_TIMEOUT,

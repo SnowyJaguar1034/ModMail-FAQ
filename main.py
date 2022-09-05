@@ -2,9 +2,7 @@ from asyncio import run
 from logging import INFO, FileHandler, Formatter, StreamHandler, basicConfig, getLogger
 from typing import Optional, Union
 
-from discord import (
-    Activity,
-    ActivityType,
+from discord import (  # Activity,; ActivityType,
     Attachment,
     Intents,
     Interaction,
@@ -63,7 +61,7 @@ async def faq(interaction: Interaction):
 
 
 @client.tree.command(name="help", description="Get support for ModMail")
-async def help(interaction: Interaction):
+async def help_command(interaction: Interaction):
     view, embed = await generate_dropdown(
         defauult_colour=client.config.DEFAULT_COLOUR, persistant=False
     )
