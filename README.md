@@ -1,5 +1,9 @@
 # FAQ
- Simple [Discord.py](https://github.com/Rapptz/discord.py) bot for the ModMail support server
+ Simple [Discord.py](https://github.com/Rapptz/discord.py) bot for the ModMail support server.<br/>
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6486044036de4b9eacd16d8c2b1a61d8)](https://app.codacy.com/gh/SnowyJaguar1034/ModMail-FAQ?utm_source=github.com&utm_medium=referral&utm_content=SnowyJaguar1034/ModMail-FAQ&utm_campaign=Badge_Grade_Settings)
+ [![Codacy Security Scan](https://github.com/SnowyJaguar1034/ModMail-FAQ/actions/workflows/codacy.yml/badge.svg)](https://github.com/SnowyJaguar1034/ModMail-FAQ/actions/workflows/codacy.yml)
+ [![GitHub CodeQL Security Scan](https://github.com/SnowyJaguar1034/ModMail-FAQ/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/SnowyJaguar1034/ModMail-FAQ/actions/workflows/codeql-analysis.yml)
+ [![Supported Python Versions](https://github.com/SnowyJaguar1034/ModMail-FAQ/actions/workflows/python-package-version-check.yml/badge.svg)](https://github.com/SnowyJaguar1034/ModMail-FAQ/actions/workflows/python-package-version-check.yml)
 
 ## Table of Contents
 
