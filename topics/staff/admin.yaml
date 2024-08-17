@@ -1,4 +1,4 @@
-title: Should I give Modmail administrator:
+title: Should I give Modmail administrator
 content: |
     Providing the administrator role to Modmail would migitate any issues when it comes to permissions, however we do not encourage anyone to provide the administrator permission to ANY bots in your server (unless you have FULL control over the code and how the bot functions). Modmail does not require administrator, however it does require certain permissions to work. Check the "What permissions does ModMail need?" option for more information.
 image: 
