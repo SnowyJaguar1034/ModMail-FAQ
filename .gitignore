@@ -1,5 +1,3 @@
-.DS_Store
-.idea
-dist
-node_modules
-env.jsonc
+.env
+.env.example
+.venv
