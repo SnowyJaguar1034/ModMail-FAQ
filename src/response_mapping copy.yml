@@ -1,4 +1,4 @@
-- trigger: 1
+trigger_01:
   command: "ask2ask"
   reaction: "help:1251274523861581999"
   aliases:
@@ -7,7 +7,7 @@
   - "support"
   - "help"
   regex: ""
-- trigger: 2
+trigger_02:
   command: "banned"
   reaction: "banned:1251258151425282289"
   aliases:
@@ -16,13 +16,13 @@
     - "bloxburg"
     - "appeal"
   regex: "(?i)ban|racefactory|bloxburg|appeal"
-- trigger: 3
+trigger_03:
   command: "wrongserver"
   reaction: "wrong_server:1251257683487494217"
   aliases:
   - "ws"
   regex: "(?i)wrong server|not the right server|not the server"
-- trigger: 4
+trigger_04:
   command: "setup"
   reaction: "setup:1251258670981976126"
   aliases:
@@ -33,7 +33,7 @@
   - "firststep"
   - "fs"
   regex: "(?i:modmail (?i:invite|joined|setup|added)|invite modmail|setup modmail|added modmail|setup bot|bot setup|bot added|setup"
-- trigger: 5
+trigger_05:
   command: "ticket"
   reaction: "ticket~1:1251258339518582787"
   aliases:
@@ -48,7 +48,7 @@
   - "mail"
   - "support"
   regex: "(?:m(?:essage (?:a )?server|sg (?:a )?server)|c(?:reate (?:a )?ticket|ustom commands)|open (?:a )?ticket)"
-- trigger: 6
+trigger_06:
   command: "premium"
   reaction: "premium:1251273319110414429"
   aliases:
@@ -56,7 +56,7 @@
   - "patron"
   - "donate"
   regex: "(?:message logs|(?:transcrip|snippe)ts|p(?:atreon|remium)|donate)"
-- trigger: 7
+trigger_07:
   command: "notresponding"
   reaction: "no_response:1251273446860783718"
   aliases:
@@ -65,7 +65,7 @@
   - "noresponse"
   - "nores"
   regex: "(?:doesn't (?:seem to )?work|doesn't respond|isn(?:'t (?:respond|working)|t (?:respond|working))|no respon(?:se|d))"
-- trigger: 8
+trigger_08:
   command: "custom"
   reaction: "custom_instance:1251256312017457284"
   aliases:
@@ -83,7 +83,7 @@
   - "noverify"
   - "bypass"
   regex: "(?i)(?:bot(?:'?s)?|(?:change|customi[sz]e)(?: the)?) (?:name|profile|banner|icon|avatar|pfp|status)|bot(?:'?s)? user|customi[sz]e(?: the)? (?:instance|bot)|private (?:instance|bot)|(?:no|bypass) verif(?:ication|y)"
-- trigger: 9
+trigger_09:
   command: "selfhost"
   reaction: "selfhost:1251257779730124884"
   aliases:
@@ -92,7 +92,7 @@
   - "sh"
   - "github"
   regex: "(?i)(?:source|modmails?|bots?|bot's?|self(?:-)?host|host (?:modmail|bot)|(?:best|recommended|which) (?:virtual(?: private)? )?server)(?:'s)?(?: code| repo| github)"
-- trigger: 10
+trigger_10:
   command: "clyde"
   reaction: "clyde:1251278199292297289"
   aliases:
@@ -102,7 +102,7 @@
   - "blockedme"
   - "botblocked"
   regex: "(?i:only accepting (?:direct message|dm)s from friends|message (?:(?:could not be|not) delivered|blocked)|(?:don't share a|no (?:shared|mutual)) server|clyde(?:[- ]bot)?|i(?:'| a)?m blocked|bot blocked me)"
-- trigger: 11
+trigger_11:
   command: "globalticket"
   reaction: "global_ticket:1251274307347153027"
   aliases:
@@ -113,7 +113,7 @@
   - "sees"
   - "see"
   regex: "(ticket|tickets|everyone) (can|see|sees|see's) (the )?(mail|ticket|tickets|my mail|mod mail|modmail|mod-mail) message"
-- trigger: 12
+trigger_12:
   command: "logging"
   reaction: "text_file:1254891424965722122"
   aliases:
@@ -126,7 +126,7 @@
   - "l+"
   - "log"
   regex: "(?i)(?:\\-|<@!?204255221017214977>|!|.)\\s*(?:logging|logs|transcript|file|viewer)(?: +|\\z)"
-- trigger: 13
+trigger_13:
   command: "verification"
   reaction: "verification:125127354"
   aliases:
