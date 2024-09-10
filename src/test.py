@@ -4,15 +4,36 @@ import logging.config
 
 import msgspec
 
-logger = logging.getLogger(__name__)
+### Iniial Setup ###
 
-RESPONSE_MAPPING = None
+logger: logging.Logger = logging.getLogger(__name__)
 
-with open("src/response_mapping.yml", "rb") as f:
-    RESPONSE_MAPPING = msgspec.yaml.decode(f.read())
+SUPPORT_RESPONSE_MAPPING: list[dict] = None
 
-with open ("src/output.json", "w") as f:
-    f.write(f"{RESPONSE_MAPPING}")
+"""
+RESPONSE_MAPPING: list[dict[str, int]] = [ {
+        "trigger message id": 00000000,
+        "channel id": 00000000,
+        "author id": 00000000,
+        "answering message": 00000000,
+    }
+]
+"""
 
+RESPONSE_MAPPING: list[dict[str, int]] = [ { } ]
+    
+### Read the YAML file ###
+with open("src/support_responses_mapping.yml", "rb") as f:
+    SUPPORT_RESPONSE_MAPPING = msgspec.yaml.decode(f.read())
+
+with open("src/output.txt", "w") as f:
+    f.write(str(SUPPORT_RESPONSE_MAPPING))
+
+### Update the dictionary ###
+responses_len = len(SUPPORT_RESPONSE_MAPPING)
+
+
+
+### Main Function ###
 if __name__ == "__main__":
-    print(RESPONSE_MAPPING)
+    print(SUPPORT_RESPONSE_MAPPING)
