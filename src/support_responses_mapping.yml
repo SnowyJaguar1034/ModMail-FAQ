@@ -1,5 +1,20 @@
-- trigger: 1
-  command: "ask2ask"
+---
+default_colour: 0x00FF00
+
+default_buttons:
+  Delete Response:
+    custom_id: "mmsr-delete"
+    style: 4
+    emoji:
+      id: 1251255316121653343
+  Bookmark Response:
+    custom_id: "mmsr-bookmark"
+    style: 2
+    emoji:
+      id: 1251243802207846566
+
+ask2ask:
+  trigger: 1
   reaction: "help:1251274523861581999"
   aliases:
   - "a2a"
@@ -7,8 +22,13 @@
   - "support"
   - "help"
   regex: ""
-- trigger: 2
-  command: "banned"
+  embed:
+    title: "Don't just say `i need help`, tell us what you need help with!"
+    description: "[This saves all of us time and we can jump in to provide you with a solution!](https://dontasktoask.com/)"
+  default_buttons: True
+
+banned:
+  trigger: 2
   reaction: "banned:1251258151425282289"
   aliases:
     - "ban"
@@ -16,14 +36,29 @@
     - "bloxburg"
     - "appeal"
   regex: "(?i)ban|racefactory|bloxburg|appeal"
-- trigger: 3
-  command: "wrongserver"
+  embed:
+    title: "How do I get unbanned?"
+    description: "You cannot use ModMail to contact a server you are banned from."
+  default_buttons: True
+
+wrongserver:
+  trigger: 3
   reaction: "wrong_server:1251257683487494217"
   aliases:
   - "ws"
   regex: "(?i)wrong server|not the right server|not the server"
-- trigger: 4
-  command: "setup"
+  embed:
+    fields:
+    - name: "You are in the wrong server for what you’re seeking help for"
+      value: "We are the Support server for the ModMail __**bot**__."
+      inline: True
+    - name: "We have no affiliation with the server/community/game you are seeking help for."
+      value: "We cannot help you any further, sorry."
+      inline: True
+  default_buttons: True
+
+setup:
+  trigger: 4
   reaction: "setup:1251258670981976126"
   aliases:
   - "gs"
@@ -33,8 +68,18 @@
   - "firststep"
   - "fs"
   regex: "(?i:modmail (?i:invite|joined|setup|added)|invite modmail|setup modmail|added modmail|setup bot|bot setup|bot added|setup"
-- trigger: 5
-  command: "ticket"
+  embed:
+    title: "How do I set up ModMail?"
+    fields:
+    - name: "Initial Setup"
+      value: "**1.** [Invite the bot](https://modmail.xyz/invite).\n**2.** Run `=setup` in your server.\n**3.** Done! :tada:\n\nYou can use `=help` for a [list of commands.](https://modmail.xyz/commands)"
+      inline: True
+    - name: "Premium"
+      value: "Please consider purchasing premium for more features!\nThis includes full conversation logging, custom greeting and closing messages, as well as snippets."
+      inline: True
+
+ticket:
+  trigger: 5
   reaction: "ticket~1:1251258339518582787"
   aliases:
   - "thread"
@@ -48,16 +93,18 @@
   - "mail"
   - "support"
   regex: "(?:m(?:essage (?:a )?server|sg (?:a )?server)|c(?:reate (?:a )?ticket|ustom commands)|open (?:a )?ticket)"
-- trigger: 6
-  command: "premium"
+
+premium:
+  trigger: 6
   reaction: "premium:1251273319110414429"
   aliases:
   - "patreon"
   - "patron"
   - "donate"
   regex: "(?:message logs|(?:transcrip|snippe)ts|p(?:atreon|remium)|donate)"
-- trigger: 7
-  command: "notresponding"
+
+notresponding:
+  trigger: 7
   reaction: "no_response:1251273446860783718"
   aliases:
   - "nr"
@@ -65,8 +112,9 @@
   - "noresponse"
   - "nores"
   regex: "(?:doesn't (?:seem to )?work|doesn't respond|isn(?:'t (?:respond|working)|t (?:respond|working))|no respon(?:se|d))"
-- trigger: 8
-  command: "custom"
+
+custom:
+  trigger: 8
   reaction: "custom_instance:1251256312017457284"
   aliases:
   - "change"
@@ -83,8 +131,9 @@
   - "noverify"
   - "bypass"
   regex: "(?i)(?:bot(?:'?s)?|(?:change|customi[sz]e)(?: the)?) (?:name|profile|banner|icon|avatar|pfp|status)|bot(?:'?s)? user|customi[sz]e(?: the)? (?:instance|bot)|private (?:instance|bot)|(?:no|bypass) verif(?:ication|y)"
-- trigger: 9
-  command: "selfhost"
+
+selfhost:
+  trigger: 9
   reaction: "selfhost:1251257779730124884"
   aliases:
   - "source"
@@ -92,8 +141,9 @@
   - "sh"
   - "github"
   regex: "(?i)(?:source|modmails?|bots?|bot's?|self(?:-)?host|host (?:modmail|bot)|(?:best|recommended|which) (?:virtual(?: private)? )?server)(?:'s)?(?: code| repo| github)"
-- trigger: 10
-  command: "clyde"
+
+clyde:
+  trigger: 10
   reaction: "clyde:1251278199292297289"
   aliases:
   - "blocked"
@@ -102,8 +152,9 @@
   - "blockedme"
   - "botblocked"
   regex: "(?i:only accepting (?:direct message|dm)s from friends|message (?:(?:could not be|not) delivered|blocked)|(?:don't share a|no (?:shared|mutual)) server|clyde(?:[- ]bot)?|i(?:'| a)?m blocked|bot blocked me)"
-- trigger: 11
-  command: "globalticket"
+
+globalticket:
+  trigger: 11
   reaction: "global_ticket:1251274307347153027"
   aliases:
   - "global"
@@ -113,8 +164,9 @@
   - "sees"
   - "see"
   regex: "(ticket|tickets|everyone) (can|see|sees|see's) (the )?(mail|ticket|tickets|my mail|mod mail|modmail|mod-mail) message"
-- trigger: 12
-  command: "logging"
+
+logging:
+  trigger: 12
   reaction: "text_file:1254891424965722122"
   aliases:
   - "logging+"
@@ -126,8 +178,9 @@
   - "l+"
   - "log"
   regex: "(?i)(?:\\-|<@!?204255221017214977>|!|.)\\s*(?:logging|logs|transcript|file|viewer)(?: +|\\z)"
-- trigger: 13
-  command: "verification"
+
+verification:
+  trigger: 13
   reaction: "verification:125127354"
   aliases:
   - "verify"
