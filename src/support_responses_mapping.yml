@@ -2,12 +2,12 @@
 default_colour: 0x00FF00
 
 default_buttons:
-  Delete Response:
+  - label: Delete Response:
     custom_id: "mmsr-delete"
     style: 4
     emoji:
       id: 1251255316121653343
-  Bookmark Response:
+  - label: Bookmark Response:
     custom_id: "mmsr-bookmark"
     style: 2
     emoji:
@@ -77,6 +77,47 @@ setup:
     - name: "Premium"
       value: "Please consider purchasing premium for more features!\nThis includes full conversation logging, custom greeting and closing messages, as well as snippets."
       inline: True
+  default_buttons: True
+  extra_fields:
+  - name: "Advanced Setup"
+    value: "Some additional commands you could use are:"
+    inline: false
+  - name: "`=pingrole <roles>`"
+    value: "For configuring which roles get pinged upon a ModMail ticket being created."
+    inline: true
+  - name: "`=accessrole <roles>`"
+    value: "For configuring which roles can reply to ModMail tickets."
+    inline: true
+  - name: "`=commandonly`"
+    value: "For toggling if commands are required to reply to tickets.\nIf **disabled** staff have only to type in the channel for their message to be sent.\nIf **enabled** staff have to reply with `=reply` or `=areply`."
+    inline: false
+  - name: "`=anonymous`"
+    value: "For toggling anonymous staff replies to hide the responder's name.\nThis does not work for making your end-user anonymous."
+    inline: true
+  - name: "`=logging`"
+    value: "For toggling log messages of tickets being opened or closed.\nThis does not log a transcript of the messages."
+    inline: true
+  - name: "You can mention the roles, use role IDs or role names."
+    value: "For role names with a space, it needs to be in quotes (e.g. \"Head Admin\")"
+    inline: false
+  extra_buttons:
+    - label: "Toggle Extra Information"
+      custom_id: "mmsr-setup-extra"
+      style: 1
+      emoji:
+        id: 1258858981372330165
+    - label: "Invite ModMail"
+      custom_id: "mmsr-invite"
+      url: "https://modmail.xyz/invite"
+      style: link
+      emoji:
+        id: 702099194701152266
+    - label: "ModMail Commands (=help)"
+      custom_id: "mmsr-commands"
+      url: "https://modmail.xyz/commands"
+      style: link
+      emoji:
+        id: 702099194701152266
 
 ticket:
   trigger: 5
